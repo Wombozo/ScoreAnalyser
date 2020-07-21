@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:ScoreAnalyser.ViewModels;assembly=ScoreAnalyser"
+        xmlns:views="clr-namespace:ScoreAnalyser.Views;assembly=ScoreAnalyser"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -9,9 +10,39 @@
         Title="ScoreAnalyser">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <DockPanel>
+        <Menu Name="MainMenu" DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding Open}" />
+                <MenuItem Header="Save" Command="{Binding Save}" />
+            </MenuItem>
+        </Menu>
+        <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonic :" Grid.Row="0" />
+            <views:MiscView Grid.Row="1"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2"/>
+            <views:DominantView Grid.Row="3"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominant :" Grid.Row="4" />
+            <views:MiscView Grid.Row="5"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Misc :" Grid.Row="6" />
+            <views:MiscView Grid.Row="7"/>
+        </Grid>
+        <Canvas MinWidth="200" />
+    </DockPanel>
 </Window>

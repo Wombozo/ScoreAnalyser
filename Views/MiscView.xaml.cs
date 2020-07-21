@@ -1,15 +1,12 @@
-using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media.Imaging;
 
 namespace ScoreAnalyser.Views
 {
-    public class MainWindow : Window
+    public class MiscView : UserControl
     {
-        
-        public MainWindow()
+        public MiscView()
         {
             InitializeComponent();
         }
@@ -17,7 +14,6 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            WindowState = WindowState.Maximized;
         }
     }
 }
