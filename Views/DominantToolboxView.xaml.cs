@@ -5,10 +5,10 @@ using Avalonia.Media;
 
 namespace ScoreAnalyser.Views
 {
-    public class DominantView : UserControl
+    public class DominantToolboxView : UserControl
     {
 
-        public DominantView()
+        public DominantToolboxView()
         {
             InitializeComponent();
         }
