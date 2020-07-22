@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using Avalonia;
 using Avalonia.Controls;
@@ -21,6 +22,7 @@ namespace ScoreAnalyser.Views
             AvaloniaXamlLoader.Load(this);
             WindowState = WindowState.Maximized;
             Canvas = this.FindControl<Canvas>("Canvas");
+            ItemsOnBoard = new List<Border>();
         }
 
         public static Border CreateBorderImage(IBitmap source)
@@ -33,24 +35,27 @@ namespace ScoreAnalyser.Views
             return border;
         }
 
-        private static Border Border { get; set; }
+        private static Border ItemFromPanel { get; set; }
+        private static List<Border> ItemsOnBoard { get; set; }
 
         private static void DoPress(object sender, Avalonia.Input.PointerPressedEventArgs e)
         {
-            if (sender is Border border && border.Parent is WrapPanel)
-                Border = CreateBorderImage((border.Child as Image)?.Source);
-            else
-                Border = null;
+            ItemFromPanel = sender switch
+            {
+                Border border when border.Parent is WrapPanel => CreateBorderImage((border.Child as Image)?.Source),
+                _ => null
+            };
         }
 
         private static void DoRelease(object sender, Avalonia.Input.PointerReleasedEventArgs e)
         {
-            if (Border == null)
+            if (ItemFromPanel == null)
                 return;
             var point = e.GetPosition(Canvas);
-            Canvas.SetLeft(Border, point.X - 32);
-            Canvas.SetTop(Border, point.Y - 32);
-            Canvas.Children.Add(Border);
+            Canvas.SetLeft(ItemFromPanel, point.X - 32);
+            Canvas.SetTop(ItemFromPanel, point.Y - 32);
+            Canvas.Children.Add(ItemFromPanel);
+            ItemsOnBoard.Add(ItemFromPanel);
         }
     }
 }
