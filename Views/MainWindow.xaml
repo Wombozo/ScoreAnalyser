@@ -35,14 +35,14 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonic :" Grid.Row="0" />
-            <views:MiscView Grid.Row="1"/>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2"/>
-            <views:DominantView Grid.Row="3"/>
+            <views:TonicView Grid.Row="1" />
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2" />
+            <views:DominantView Grid.Row="3" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominant :" Grid.Row="4" />
-            <views:MiscView Grid.Row="5"/>
+            <views:MiscView Grid.Row="5" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Misc :" Grid.Row="6" />
-            <views:MiscView Grid.Row="7"/>
+            <views:MiscView Grid.Row="7" />
         </Grid>
-        <Canvas MinWidth="200" />
+        <Canvas MinWidth="600" Name="Canvas"/>
     </DockPanel>
 </Window>

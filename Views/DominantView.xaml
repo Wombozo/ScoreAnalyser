@@ -6,6 +6,6 @@
              x:Class="ScoreAnalyser.Views.DominantView">
 
     <DockPanel>
-        <WrapPanel Name="DominantWrapPanel"/>
+        <WrapPanel Name="DominantWrapPanel" />
     </DockPanel>
 </UserControl>
