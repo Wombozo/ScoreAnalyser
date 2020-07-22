@@ -4,18 +4,24 @@ using System.Text;
 
 namespace ScoreAnalyser.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+  public class MainWindowViewModel : ViewModelBase
+  {
+    public MainWindowViewModel()
     {
-        public string Greeting => "";
-
-        public object Open
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public object Save
-        {
-            get { throw new NotImplementedException(); }
-        }
+      DominantToolbox = new DominantToolboxViewModel();
     }
+    public string Greeting => "";
+
+    public DominantToolboxViewModel DominantToolbox { get; }
+
+    public object Open
+    {
+      get { throw new NotImplementedException(); }
+    }
+
+    public object Save
+    {
+      get { throw new NotImplementedException(); }
+    }
+  }
 }

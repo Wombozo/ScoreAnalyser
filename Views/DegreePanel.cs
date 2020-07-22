@@ -12,8 +12,7 @@ namespace ScoreAnalyser.Views
         public static void CreatePanel(string assetPngPath, string wrapPanelName, ISolidColorBrush color,
             UserControl userControl)
         {
-            var projectPath =
-                Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())));
+            var projectPath = Directory.GetCurrentDirectory();
             var WrapPanel = userControl.FindControl<WrapPanel>(wrapPanelName);
             WrapPanel.Background = color;
             var files = Directory.GetFiles(projectPath + assetPngPath)

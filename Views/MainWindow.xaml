@@ -37,7 +37,7 @@
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonic :" Grid.Row="0" />
             <views:TonicView Grid.Row="1" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2" />
-            <views:DominantView Grid.Row="3" />
+            <views:DominantToolboxView Grid.Row="3" DataContext="{Binding DominantToolbox}" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominant :" Grid.Row="4" />
             <views:MiscView Grid.Row="5" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Misc :" Grid.Row="6" />
