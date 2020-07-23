@@ -3,17 +3,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:scoreAnalyser="clr-namespace:ScoreAnalyser"
+             xmlns:vm="clr-namespace:ScoreAnalyser.ViewModels;assembly=ScoreAnalyser"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ScoreAnalyser.Views.PredominantView">
+
     <UserControl.Resources>
         <scoreAnalyser:BitmapValueConverter x:Key="bitmapConverter"/>
     </UserControl.Resources>
+    
+    <Design.DataContext>
+        <vm:PredominantViewModel />
+    </Design.DataContext>
 
     <Border Name="PredominantBorder">
         <!-- ReSharper disable once Xaml.InvalidType -->
         <Image Width="50" Height="50" Margin="4" >
             <Image.Source>
-                <Binding Path="Path" Converter="{StaticResource bitmapConverter}" />
+                <Binding Path="ImagePath" Converter="{StaticResource bitmapConverter}" />
             </Image.Source>
         </Image>
     </Border>

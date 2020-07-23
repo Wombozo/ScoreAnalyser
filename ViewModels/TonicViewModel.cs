@@ -5,5 +5,9 @@ namespace ScoreAnalyser.ViewModels
         public TonicViewModel(string imagePath) : base(imagePath)
         {
         }
+
+        public TonicViewModel()
+        {
+        }
     }
 }

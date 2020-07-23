@@ -5,5 +5,9 @@ namespace ScoreAnalyser.ViewModels
         public PredominantViewModel(string imagePath) : base(imagePath)
         {
         }
+
+        public PredominantViewModel()
+        {
+        }
     }
 }

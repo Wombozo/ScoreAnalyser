@@ -2,6 +2,10 @@
 {
     public class MusicItemViewModel : ViewModelBase
     {
+        public MusicItemViewModel()
+        {
+            
+        }
       public MusicItemViewModel(string imagePath)
       {
           ImagePath = imagePath;

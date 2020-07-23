@@ -5,5 +5,9 @@
       public DominantViewModel(string imagePath) : base(imagePath)
       {
       }
+
+      public DominantViewModel()
+      {
+      }
     }
 }
