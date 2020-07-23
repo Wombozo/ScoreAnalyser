@@ -1,8 +1,11 @@
-using System.Collections.Generic;
+using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
+using DynamicData.Binding;
+using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
 {
@@ -13,11 +16,23 @@ namespace ScoreAnalyser.Views
             InitializeComponent();
         }
 
+        private ScoreViewModel ScoreViewModel { get; set; }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
             Canvas = this.FindControl<Canvas>("Canvas");
-            LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
+            ScoreViewModel = (ScoreViewModel) DataContext;
+            ScoreViewModel.WhenValueChanged(x => x.KeyPressedScale)
+                .Subscribe(k => KeyEventScaling((EventArgs) k));
+        }
+
+        private void KeyEventScaling(EventArgs e)
+        {
+            if (!(e is KeyEventArgs k))
+                return;
+            if ( k.Key == Key.Add)
+                ScoreViewModel.SetScaling();
         }
 
         private Border CreateBorderImage(IBitmap source)
@@ -29,7 +44,7 @@ namespace ScoreAnalyser.Views
             // border.PointerReleased += DoRelease;
             return border;
         }
-        private LayoutTransformControl LayoutTransformControl { get; set; }
+
         // public void DoPress(object sender, PointerPressedEventArgs e)
         // {
         //     ItemFromPanel = sender switch

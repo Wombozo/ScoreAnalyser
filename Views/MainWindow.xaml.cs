@@ -1,4 +1,5 @@
 #nullable enable
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -19,7 +20,7 @@ namespace ScoreAnalyser.Views
             KeyDown += KeyPressedScale;
         }
 
-        private void KeyPressedScale(object? sender, KeyEventArgs e)
+        private void KeyPressedScale(object? sender, EventArgs e)
         {
             ((MainWindowViewModel)DataContext).KeyPressedScale(e);
         }
