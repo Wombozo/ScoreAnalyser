@@ -16,6 +16,9 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            var border = this.FindControl<Border>("PredominantBorder");
+            border.PointerPressed += ScoreView.DoPress;
+            border.PointerReleased += ScoreView.DoRelease;
         }
     }
 }

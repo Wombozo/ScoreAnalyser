@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace ScoreAnalyser.ViewModels
 {
-    public class DominantViewModel : HarmonicFunctionViewModel
+    public class DominantViewModel : MusicItemViewModel
     {
       public DominantViewModel(string path) : base(path)
       {

@@ -7,8 +7,13 @@
     <local:BitmapValueConverter x:Key="bitmapConverter"/>
   </UserControl.Resources>
 
-  <Border>
-    <Image Source="{Binding Path, Converter={StaticResource bitmapConverter}}" Width="50" Height="50" Margin="4"/>
+  <Border Name="DominantBorder">
+    <!-- ReSharper disable once Xaml.InvalidType -->
+    <Image Width="50" Height="50" Margin="4" >
+      <Image.Source>
+        <Binding Path="Path" Converter="{StaticResource bitmapConverter}" />
+      </Image.Source>
+    </Image>
   </Border>
 
 </UserControl>

@@ -16,7 +16,9 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            CreatePanel("/Assets/png/tonic/", "TonicWrapPanel", Brushes.LightYellow,this);
+            var border = this.FindControl<Border>("TonicBorder");
+            border.PointerPressed += ScoreView.DoPress;
+            border.PointerReleased += ScoreView.DoRelease;
         }
     }
 }

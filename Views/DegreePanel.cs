@@ -12,7 +12,8 @@ namespace ScoreAnalyser.Views
         public static void CreatePanel(string assetPngPath, string wrapPanelName, ISolidColorBrush color,
             UserControl userControl)
         {
-            var projectPath = Directory.GetCurrentDirectory();
+            //var projectPath = Application.ExecutablePath;
+            var projectPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())));
             var WrapPanel = userControl.FindControl<WrapPanel>(wrapPanelName);
             WrapPanel.Background = color;
             var files = Directory.GetFiles(projectPath + assetPngPath)
@@ -20,7 +21,7 @@ namespace ScoreAnalyser.Views
             files.ToList().ForEach(f =>
             {
                 var bitmap = new Bitmap(f);
-                WrapPanel.Children.Add(MainWindow.CreateBorderImage(bitmap));
+                WrapPanel.Children.Add(ScoreView.CreateBorderImage(bitmap));
             });
         }
     }

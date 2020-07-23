@@ -16,7 +16,9 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            CreatePanel("/Assets/png/predominant/", "PredominantWrapPanel", Brushes.LightBlue,this);
+            var border = this.FindControl<Border>("PredominantBorder");
+            border.PointerPressed += ScoreView.DoPress;
+            border.PointerReleased += ScoreView.DoRelease;
         }
 
     }

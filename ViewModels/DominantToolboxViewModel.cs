@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using ReactiveUI;
 
 namespace ScoreAnalyser.ViewModels
 {
-  public class DominantToolboxViewModel : HarmonicFunctionToolboxViewModel
+  public class DominantToolboxViewModel : MusicItemToolboxViewModel
   {
     public DominantToolboxViewModel()
     {

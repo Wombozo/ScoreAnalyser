@@ -35,14 +35,18 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonic :" Grid.Row="0" />
-            <views:TonicView Grid.Row="1" />
+            <views:TonicToolboxView Grid.Row="1" DataContext="{Binding TonicToolbox}" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2" />
             <views:DominantToolboxView Grid.Row="3" DataContext="{Binding DominantToolbox}" />
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominant :" Grid.Row="4" />
-            <views:MiscView Grid.Row="5" />
+            <views:PredominantView Grid.Row="5" DataContext="{Binding PredominantToolbox}"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Misc :" Grid.Row="6" />
             <views:MiscView Grid.Row="7" />
         </Grid>
-        <Canvas MinWidth="600" Name="Canvas"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <LayoutTransformControl>
+                <views:ScoreView/>
+            </LayoutTransformControl>
+        </ScrollViewer>
     </DockPanel>
 </Window>

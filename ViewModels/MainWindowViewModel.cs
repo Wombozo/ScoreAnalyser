@@ -9,10 +9,14 @@ namespace ScoreAnalyser.ViewModels
     public MainWindowViewModel()
     {
       DominantToolbox = new DominantToolboxViewModel();
+      TonicToolbox = new TonicToolboxViewModel();
+      PredominantToolbox = new PredominantToolboxViewModel();
     }
     public string Greeting => "";
 
     public DominantToolboxViewModel DominantToolbox { get; }
+    public TonicToolboxViewModel TonicToolbox { get; }
+    public PredominantToolboxViewModel PredominantToolbox { get; }
 
     public object Open
     {

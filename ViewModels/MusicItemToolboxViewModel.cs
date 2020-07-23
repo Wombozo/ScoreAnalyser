@@ -8,11 +8,11 @@ using ReactiveUI;
 
 namespace ScoreAnalyser.ViewModels
 {
-  public class HarmonicFunctionToolboxViewModel : ViewModelBase
+  public class MusicItemToolboxViewModel : ViewModelBase
   {
-    protected static IOrderedEnumerable<string> FindFiles(string assetPngPath)
+    protected static IEnumerable<string> FindFiles(string assetPngPath)
     {
-      var projectPath = Directory.GetCurrentDirectory();
+      var projectPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())));
       var files = Directory.GetFiles(projectPath + assetPngPath)
           .OrderBy(f => int.Parse(Path.GetFileNameWithoutExtension(f).Split('_')[0]));
       return files;
