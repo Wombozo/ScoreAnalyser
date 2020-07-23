@@ -1,8 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
 {
@@ -18,13 +16,13 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             var border = this.FindControl<Border>("DominantBorder");
-            border.PointerPressed += DoPress;
+            // border.PointerPressed += DoPress;
             //border.PointerReleased += DoRelease;
         }
 
         private void DoPress(object sender, PointerPressedEventArgs _)
         {
-            ((DominantViewModel) DataContext).SelectItem(sender);
+            // ((DominantViewModel) DataContext).SelectItem(sender);
         }
     }
 }

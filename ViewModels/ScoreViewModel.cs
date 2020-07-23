@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Avalonia.Input;
 using ReactiveUI;
 

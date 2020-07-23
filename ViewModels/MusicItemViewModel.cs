@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ReactiveUI;
-
-namespace ScoreAnalyser.ViewModels
+﻿namespace ScoreAnalyser.ViewModels
 {
     public class MusicItemViewModel : ViewModelBase
     {
-      public MusicItemViewModel(string path)
+      public MusicItemViewModel(string imagePath)
       {
-          Path = path;
+          ImagePath = imagePath;
       }
-      public string Path { get; }
-
-      public object PanelItem { get; set; }
-
-      public void SelectItem(object item)
-      {
-          
-      }
+      public string ImagePath { get; }
     }
 }

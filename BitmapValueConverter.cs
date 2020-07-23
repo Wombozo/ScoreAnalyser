@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Markup;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;

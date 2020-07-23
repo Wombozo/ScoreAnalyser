@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ReactiveUI;
-
-namespace ScoreAnalyser.ViewModels
+﻿namespace ScoreAnalyser.ViewModels
 {
     public class DominantViewModel : MusicItemViewModel
     {
-      public DominantViewModel(string path) : base(path)
+      public DominantViewModel(string imagePath) : base(imagePath)
       {
       }
     }
