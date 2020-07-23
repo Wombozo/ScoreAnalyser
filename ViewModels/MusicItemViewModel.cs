@@ -12,5 +12,12 @@ namespace ScoreAnalyser.ViewModels
           Path = path;
       }
       public string Path { get; }
+
+      public object PanelItem { get; set; }
+
+      public void SelectItem(object item)
+      {
+          
+      }
     }
 }

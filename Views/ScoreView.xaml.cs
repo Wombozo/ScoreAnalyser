@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media.Imaging;
+using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
 {
@@ -17,10 +20,12 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             Canvas = this.FindControl<Canvas>("Canvas");
+            LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
+            var t = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
             ItemsOnBoard = new List<Border>();
         }
-        
-        public static Border CreateBorderImage(IBitmap source)
+
+        private Border CreateBorderImage(IBitmap source)
         {
             var border = new Border
                 {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
@@ -32,8 +37,8 @@ namespace ScoreAnalyser.Views
 
         private static Border ItemFromPanel { get; set; }
         private static List<Border> ItemsOnBoard { get; set; }
-
-        public static void DoPress(object sender, Avalonia.Input.PointerPressedEventArgs e)
+        private LayoutTransformControl LayoutTransformControl { get; set; }
+        public void DoPress(object sender, PointerPressedEventArgs e)
         {
             ItemFromPanel = sender switch
             {
@@ -42,17 +47,16 @@ namespace ScoreAnalyser.Views
             };
         }
 
-        private static Canvas Canvas { get; set; }
-
-        public static void DoRelease(object sender, Avalonia.Input.PointerReleasedEventArgs e)
+        public void DoRelease(object sender, PointerReleasedEventArgs e)
         {
             if (ItemFromPanel == null)
                 return;
-            var point = e.GetPosition(Canvas);
+            var point = e.GetPosition(LayoutTransformControl);
             Canvas.SetLeft(ItemFromPanel, point.X - 32);
             Canvas.SetTop(ItemFromPanel, point.Y - 32);
             Canvas.Children.Add(ItemFromPanel);
             ItemsOnBoard.Add(ItemFromPanel);
         }
+        private static Canvas Canvas { get; set; }
     }
 }

@@ -35,18 +35,30 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonic :" Grid.Row="0" />
-            <views:TonicToolboxView Grid.Row="1" DataContext="{Binding TonicToolbox}" />
+            <views:TonicToolboxView Grid.Row="1">
+                <views:TonicToolboxView.DataContext>
+                    <Binding Path="TonicToolbox" />
+                </views:TonicToolboxView.DataContext>
+            </views:TonicToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominant :" Grid.Row="2" />
-            <views:DominantToolboxView Grid.Row="3" DataContext="{Binding DominantToolbox}" />
+            <views:DominantToolboxView Grid.Row="3">
+                <views:DominantToolboxView.DataContext>
+                    <Binding Path="DominantToolbox" />
+                </views:DominantToolboxView.DataContext>
+            </views:DominantToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominant :" Grid.Row="4" />
-            <views:PredominantView Grid.Row="5" DataContext="{Binding PredominantToolbox}"/>
+            <views:PredominantToolboxView Grid.Row="5">
+                <views:PredominantToolboxView.DataContext>
+                    <Binding Path="PredominantToolbox" />
+                </views:PredominantToolboxView.DataContext>
+            </views:PredominantToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Misc :" Grid.Row="6" />
             <views:MiscView Grid.Row="7" />
         </Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <LayoutTransformControl>
-                <views:ScoreView/>
-            </LayoutTransformControl>
-        </ScrollViewer>
+        <views:ScoreView>
+            <views:ScoreView.DataContext>
+                <Binding Path="Score" />
+            </views:ScoreView.DataContext>
+        </views:ScoreView>
     </DockPanel>
 </Window>

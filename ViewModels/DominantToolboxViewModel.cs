@@ -3,13 +3,14 @@ using System.Linq;
 
 namespace ScoreAnalyser.ViewModels
 {
-  public class DominantToolboxViewModel : MusicItemToolboxViewModel
-  {
-    public DominantToolboxViewModel()
+    public class DominantToolboxViewModel : MusicItemToolboxViewModel
     {
-      Dominants = new ObservableCollection<DominantViewModel>(FindFiles("/Assets/png/dominant/").Select(f => new DominantViewModel(f)));
-    }
+        public DominantToolboxViewModel()
+        {
+            Dominants = new ObservableCollection<DominantViewModel>(FindFiles("/Assets/png/dominant/")
+                .Select(f => new DominantViewModel(f)));
+        }
 
-    public ObservableCollection<DominantViewModel> Dominants { get; }
-  }
+        public ObservableCollection<DominantViewModel> Dominants { get; }
+    }
 }

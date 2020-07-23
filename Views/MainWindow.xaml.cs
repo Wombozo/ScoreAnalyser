@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.Data;
-using Avalonia;
+#nullable enable
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media.Imaging;
-using SharpDX.WIC;
+using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
 {
@@ -18,6 +16,12 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             WindowState = WindowState.Maximized;
+            KeyDown += KeyPressedScale;
+        }
+
+        private void KeyPressedScale(object? sender, KeyEventArgs e)
+        {
+            ((MainWindowViewModel)DataContext).KeyPressedScale(e);
         }
     }
 }
