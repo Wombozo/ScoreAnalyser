@@ -16,13 +16,10 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             var border = this.FindControl<Border>("DominantBorder");
-            // border.PointerPressed += DoPress;
-            //border.PointerReleased += DoRelease;
         }
 
         private void DoPress(object sender, PointerPressedEventArgs _)
         {
-            // ((DominantViewModel) DataContext).SelectItem(sender);
         }
     }
 }

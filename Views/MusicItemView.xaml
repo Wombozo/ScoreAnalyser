@@ -13,9 +13,9 @@
   </Design.DataContext>
 
   <Border Name="MusicItemBorder" >
-    <!-- ReSharper disable once Xaml.InvalidType -->
-    <Image Width="50" Height="50" Margin="4"> <!--Name="{Binding Path=ImagePath}">-->
+    <Image Width="50" Height="50" Margin="4" ><!-- Name="{Binding Path=ImagePath}">-->
       <Image.Source>
+        <!-- ReSharper disable once Xaml.InvalidType -->
         <Binding Path="ImagePath" Converter="{StaticResource bitmapConverter}" />
       </Image.Source>
     </Image>
