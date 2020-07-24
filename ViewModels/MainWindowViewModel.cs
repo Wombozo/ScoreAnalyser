@@ -6,11 +6,12 @@ namespace ScoreAnalyser.ViewModels
     {
         public MainWindowViewModel()
         {
+            DragAndDropContext = new DragAndDropContext();
             DominantToolbox = new DominantToolboxViewModel();
-            TonicToolbox = new TonicToolboxViewModel();
+            TonicToolbox = new TonicToolboxViewModel(DragAndDropContext);
             PredominantToolbox = new PredominantToolboxViewModel();
             MiscToolbox = new MiscToolboxViewModel();
-            Score = new ScoreViewModel();
+            Score = new ScoreViewModel(DragAndDropContext);
         }
 
         public DominantToolboxViewModel DominantToolbox { get; }
@@ -18,6 +19,7 @@ namespace ScoreAnalyser.ViewModels
         public PredominantToolboxViewModel PredominantToolbox { get; }
         public MiscToolboxViewModel MiscToolbox { get; }
         public ScoreViewModel Score { get; }
+        public DragAndDropContext DragAndDropContext { get; }
 
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
@@ -25,5 +27,10 @@ namespace ScoreAnalyser.ViewModels
         public object Open => throw new NotImplementedException();
 
         public object Save => throw new NotImplementedException();
+    }
+
+    public class DragAndDropContext
+    {
+        public string SelectedImageSource { get; set; }
     }
 }
