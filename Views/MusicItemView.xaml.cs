@@ -4,10 +4,10 @@ using Avalonia.Markup.Xaml;
 
 namespace ScoreAnalyser.Views
 {
-    public class DominantView : UserControl
+    public class MusicItemView : UserControl
     {
 
-        public DominantView()
+        public MusicItemView()
         {
             InitializeComponent();
         }

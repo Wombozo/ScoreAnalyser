@@ -7,10 +7,10 @@ namespace ScoreAnalyser.ViewModels
     {
         public PredominantToolboxViewModel()
         {
-            Predominants = new ObservableCollection<PredominantViewModel>(FindFiles("/Assets/png/predominant/")
-                .Select(f => new PredominantViewModel(f)));
+            Predominants = new ObservableCollection<MusicItemViewModel>(FindFiles("/Assets/png/predominant/")
+                .Select(f => new MusicItemViewModel(f)));
         }
 
-        public ObservableCollection<PredominantViewModel> Predominants { get; }
+        public ObservableCollection<MusicItemViewModel> Predominants { get; }
     }
 }

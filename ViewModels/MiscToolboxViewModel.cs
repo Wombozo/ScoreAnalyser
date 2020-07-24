@@ -7,10 +7,10 @@ namespace ScoreAnalyser.ViewModels
     {
         public MiscToolboxViewModel()
         {
-            Miscs = new ObservableCollection<MiscViewModel>(FindFiles("/Assets/png/misc/")
-                .Select(f => new MiscViewModel(f)));
+            Miscs = new ObservableCollection<MusicItemViewModel>(FindFiles("/Assets/png/misc/")
+                .Select(f => new MusicItemViewModel(f)));
         }
 
-        public ObservableCollection<MiscViewModel> Miscs { get; }
+        public ObservableCollection<MusicItemViewModel> Miscs { get; }
     }
 }

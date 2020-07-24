@@ -7,9 +7,9 @@ namespace ScoreAnalyser.ViewModels
     {
         public TonicToolboxViewModel()
         {
-            Tonics = new ObservableCollection<TonicViewModel>(FindFiles("/Assets/png/tonic/").Select(f => new TonicViewModel(f)));
+            Tonics = new ObservableCollection<MusicItemViewModel>(FindFiles("/Assets/png/tonic/").Select(f => new MusicItemViewModel(f)));
         }
 
-        public ObservableCollection<TonicViewModel> Tonics { get; }
+        public ObservableCollection<MusicItemViewModel> Tonics { get; }
     }
 }
