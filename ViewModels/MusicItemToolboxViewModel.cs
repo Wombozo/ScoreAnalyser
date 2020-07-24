@@ -8,7 +8,7 @@ namespace ScoreAnalyser.ViewModels
   {
     protected static IEnumerable<string> FindFiles(string assetPngPath)
     {
-      var projectPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())));
+      var projectPath = Directory.GetCurrentDirectory();
       var files = Directory.GetFiles(projectPath + assetPngPath)
           .OrderBy(f => int.Parse(Path.GetFileNameWithoutExtension(f).Split('_')[0]));
       return files;
