@@ -14,7 +14,7 @@
 
   <Border Name="MusicItemBorder" >
     <!-- ReSharper disable once Xaml.InvalidType -->
-    <Image Width="50" Height="50" Margin="4" >
+    <Image Width="50" Height="50" Margin="4"> <!--Name="{Binding Path=ImagePath}">-->
       <Image.Source>
         <Binding Path="ImagePath" Converter="{StaticResource bitmapConverter}" />
       </Image.Source>

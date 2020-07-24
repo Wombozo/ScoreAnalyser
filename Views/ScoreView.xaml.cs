@@ -23,16 +23,6 @@ namespace ScoreAnalyser.Views
             AvaloniaXamlLoader.Load(this);
             Canvas = this.FindControl<Canvas>("Canvas");
             ScoreViewModel = (ScoreViewModel) DataContext;
-            ScoreViewModel.WhenValueChanged(x => x.KeyPressedScale)
-                .Subscribe(k => KeyEventScaling((EventArgs) k));
-        }
-
-        private void KeyEventScaling(EventArgs e)
-        {
-            if (!(e is KeyEventArgs k))
-                return;
-            if ( k.Key == Key.Add)
-                ScoreViewModel.SetScaling();
         }
 
         private Border CreateBorderImage(IBitmap source)

@@ -20,9 +20,18 @@ namespace ScoreAnalyser.Views
             KeyDown += KeyPressedScale;
         }
 
-        private void KeyPressedScale(object? sender, EventArgs e)
+        private void KeyPressedScale(object? sender, KeyEventArgs key)
         {
-            ((MainWindowViewModel)DataContext).KeyPressedScale(e);
+            switch (key.Key)
+            {
+                case Key.Add:
+                    ((MainWindowViewModel)DataContext).IncreaseScaling();
+                    break;
+                case Key.Subtract:
+                    ((MainWindowViewModel)DataContext).DecreaseScaling();
+                    break;
+            }
         }
     }
+
 }

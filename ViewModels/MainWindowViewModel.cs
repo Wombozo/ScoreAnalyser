@@ -19,7 +19,8 @@ namespace ScoreAnalyser.ViewModels
         public MiscToolboxViewModel MiscToolbox { get; }
         public ScoreViewModel Score { get; }
 
-        public void KeyPressedScale(object e) => Score.OnKeyPressedScale(e);
+        public void IncreaseScaling() => Score.IncreaseScaling();
+        public void DecreaseScaling() => Score.DecreaseScaling();
 
         public object Open => throw new NotImplementedException();
 
