@@ -17,7 +17,7 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             WindowState = WindowState.Maximized;
-            //KeyDown += KeyPressedScale;
+            KeyDown += KeyPressedScale;
         }
 
         private void KeyPressedScale(object? sender, KeyEventArgs key)

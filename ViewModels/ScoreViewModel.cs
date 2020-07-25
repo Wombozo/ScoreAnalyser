@@ -15,8 +15,10 @@ namespace ScoreAnalyser.ViewModels
 
         private uint scaling = 1;
         public void IncreaseScaling() => Scaling += STEP_SCALING;
-        public void DecreaseScaling() => Scaling -= STEP_SCALING;
-        private const int STEP_SCALING = 5;
+
+        public void DecreaseScaling() => Scaling = Scaling - STEP_SCALING > 0 ? Scaling - STEP_SCALING : Scaling;
+
+        private const int STEP_SCALING = 1;
         public DragAndDropContext DragAndDropContext { get; set; }
 
         public ScoreViewModel(DragAndDropContext dragAndDropContext)
