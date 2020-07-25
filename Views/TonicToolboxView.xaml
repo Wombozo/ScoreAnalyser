@@ -6,12 +6,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ScoreAnalyser.Views.TonicToolboxView">
 
-    <UserControl.DataContext>
-        <viewModels:TonicToolboxViewModel />
-    </UserControl.DataContext>
+    <Design.DataContext>
+        <viewModels:TonicToolboxViewModel/>
+    </Design.DataContext>
 
     <DockPanel>
-        <ItemsControl Items="{Binding Path=Tonics}" Background="LightYellow" >
+        <ItemsControl Items="{Binding Path=Tonics}" Background="LightYellow">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
