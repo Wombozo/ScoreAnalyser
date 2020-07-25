@@ -19,13 +19,21 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            PointerPressed += OnClick;
+            PointerReleased += OnRelease;
         }
 
-        public void OnClick(object sender, PointerPressedEventArgs args)
+        private void OnClick(object sender, PointerPressedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
             vm.DragAndDropContext.isDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
+        }
+
+        private void OnRelease(object sender, PointerReleasedEventArgs args)
+        {
+            var vm = (MusicItemViewModel) DataContext;
+            vm.DragAndDropContext.NotifyReleased(args);
         }
     }
 }

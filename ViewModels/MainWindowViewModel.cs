@@ -33,5 +33,7 @@ namespace ScoreAnalyser.ViewModels
     {
         public string SelectedImageSource { get; set; }
         public bool isDragging = false;
+        public event EventHandler MousedReleased;
+        public void NotifyReleased(EventArgs e) => MousedReleased?.Invoke(this, e);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Input;
 using ReactiveUI;
 
@@ -21,10 +22,9 @@ namespace ScoreAnalyser.ViewModels
         public ScoreViewModel(DragAndDropContext dragAndDropContext)
         {
             DragAndDropContext = dragAndDropContext;
+            ImagesOnScore = new List<ImageOnScore>();
         }
 
-        public ScoreViewModel()
-        {
-        }
+        public List<ImageOnScore> ImagesOnScore { get; set; }
     }
 }
