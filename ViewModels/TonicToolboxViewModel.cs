@@ -11,6 +11,10 @@ namespace ScoreAnalyser.ViewModels
                 .Select(f => new MusicItemViewModel(f, dragAndDropContext)));
         }
 
+        public TonicToolboxViewModel()
+        {
+        }
+
         public ObservableCollection<MusicItemViewModel> Tonics { get; }
     }
 }
