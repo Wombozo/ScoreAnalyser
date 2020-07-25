@@ -28,11 +28,14 @@ namespace ScoreAnalyser.Views
             var vm = (MusicItemViewModel) DataContext;
             vm.DragAndDropContext.isDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
+            vm.DragAndDropContext.NotifyPressed(args);
         }
 
         private void OnRelease(object sender, PointerReleasedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
+            vm.DragAndDropContext.isDragging = true;
+            vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
             vm.DragAndDropContext.NotifyReleased(args);
         }
     }

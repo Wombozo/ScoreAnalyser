@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
@@ -26,7 +27,8 @@ namespace ScoreAnalyser.Views
         private void WhenDataContextChanged(object o, EventArgs args)
         {
             ScoreViewModel = (ScoreViewModel) DataContext;
-            ScoreViewModel.DragAndDropContext.MousedReleased += OnRelease;
+            ScoreViewModel.DragAndDropContext.MousePressed += OnImagePressed;
+            ScoreViewModel.DragAndDropContext.MouseReleased += OnRelease;
         }
 
         private static Border CreateBorderImage(IBitmap source)
@@ -51,6 +53,13 @@ namespace ScoreAnalyser.Views
             var point = e.GetPosition(Canvas);
             AddImageOnScore(dragAndDropContext.SelectedImageSource, point.X - 32, point.Y - 32);
             dragAndDropContext.isDragging = false;
+        }
+
+        private void OnImagePressed(object sender, EventArgs evt)
+        {
+            if (!(evt is PointerPressedEventArgs e))
+                return;
+            var dragAndDropContext = (DragAndDropContext) sender;
         }
     }
 }
