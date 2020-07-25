@@ -32,5 +32,6 @@ namespace ScoreAnalyser.ViewModels
     public class DragAndDropContext
     {
         public string SelectedImageSource { get; set; }
+        public bool isDragging = false;
     }
 }

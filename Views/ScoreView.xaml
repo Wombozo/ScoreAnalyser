@@ -10,13 +10,13 @@
         <viewModels:ScoreViewModel />
     </UserControl.DataContext>
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <LayoutTransformControl >
-            <LayoutTransformControl.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
-            </LayoutTransformControl.LayoutTransform>
+    <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> -->
+        <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
+            <!-- <LayoutTransformControl.LayoutTransform> -->
+                <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
+            <!-- </LayoutTransformControl.LayoutTransform> -->
             <Canvas MinWidth="600" Name="Canvas" Height="5000" Width="5000" />
-        </LayoutTransformControl>
-    </ScrollViewer>
+        <!-- </LayoutTransformControl> -->
+    <!-- </ScrollViewer> -->
 
 </UserControl>

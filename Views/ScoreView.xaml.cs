@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -11,48 +12,43 @@ namespace ScoreAnalyser.Views
 {
     public class ScoreView : UserControl
     {
-        public ScoreView()
-        {
-            InitializeComponent();
-        }
-
+        public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
+        private LayoutTransformControl LayoutTransformControl { get; set; }
+        private static Canvas Canvas { get; set; }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            Canvas = this.FindControl<Canvas>("Canvas");
             ScoreViewModel = (ScoreViewModel) DataContext;
+            var t = this.FindControl<Canvas>("Canvas");
+            // LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
+            t.PointerReleased += DoRelease;
         }
 
-        private Border CreateBorderImage(IBitmap source)
+        private Border CreateBorderImage(string source)
         {
+            var imageSource =
+                (Bitmap) BitmapValueConverter.Instance.Convert((string) source, new Bitmap("").GetType(), null, null);
             var border = new Border
-                {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
-
-            // border.PointerPressed += DoPress;
-            // border.PointerReleased += DoRelease;
+                {Child = new Image {Source = imageSource, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
             return border;
         }
 
-        // public void DoPress(object sender, PointerPressedEventArgs e)
+        // private Border CreateBorderImage(IBitmap source)
         // {
-        //     ItemFromPanel = sender switch
-        //     {
-        //         Border border when true => CreateBorderImage((border.Child as Image)?.Source),
-        //         _ => null
-        //     };
+        //     var border = new Border
+        //         {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
+        //     return border;
         // }
-        //
-        // public void DoRelease(object sender, PointerReleasedEventArgs e)
-        // {
-        //     if (ItemFromPanel == null)
-        //         return;
-        //     var point = e.GetPosition(LayoutTransformControl);
-        //     Canvas.SetLeft(ItemFromPanel, point.X - 32);
-        //     Canvas.SetTop(ItemFromPanel, point.Y - 32);
-        //     Canvas.Children.Add(ItemFromPanel);
-        // }
-        private static Canvas Canvas { get; set; }
+
+        private void DoRelease(object sender, PointerReleasedEventArgs e)
+        {
+            var point = e.GetPosition(LayoutTransformControl);
+            var ItemFromPanel = CreateBorderImage(Directory.GetCurrentDirectory() + "/assets/tonic/1_I.png");
+            Canvas.SetLeft(ItemFromPanel, point.X - 32);
+            Canvas.SetTop(ItemFromPanel, point.Y - 32);
+            Canvas.Children.Add(ItemFromPanel);
+        }
     }
 }
