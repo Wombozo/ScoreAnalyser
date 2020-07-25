@@ -7,10 +7,10 @@ namespace ScoreAnalyser.ViewModels
         public MainWindowViewModel()
         {
             DragAndDropContext = new DragAndDropContext();
-            DominantToolbox = new DominantToolboxViewModel();
+            DominantToolbox = new DominantToolboxViewModel(DragAndDropContext);
             TonicToolbox = new TonicToolboxViewModel(DragAndDropContext);
-            PredominantToolbox = new PredominantToolboxViewModel();
-            MiscToolbox = new MiscToolboxViewModel();
+            PredominantToolbox = new PredominantToolboxViewModel(DragAndDropContext);
+            MiscToolbox = new MiscToolboxViewModel(DragAndDropContext);
             Score = new ScoreViewModel(DragAndDropContext);
         }
 

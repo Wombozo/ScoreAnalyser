@@ -5,9 +5,9 @@
   xmlns:viewModels="clr-namespace:ScoreAnalyser.ViewModels"
   mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" x:Class="ScoreAnalyser.Views.DominantToolboxView">
 
-  <UserControl.DataContext>
+  <Design.DataContext>
     <viewModels:DominantToolboxViewModel />
-  </UserControl.DataContext>
+  </Design.DataContext>
 
   <DockPanel>
     <ItemsControl Items="{Binding Path=Dominants}" Background="LightCoral">

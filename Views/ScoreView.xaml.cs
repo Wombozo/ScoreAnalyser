@@ -14,39 +14,34 @@ namespace ScoreAnalyser.Views
     {
         public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
+        private Canvas Canvas { get; set; }
         private LayoutTransformControl LayoutTransformControl { get; set; }
-        private static Canvas Canvas { get; set; }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            ScoreViewModel = (ScoreViewModel) DataContext;
             Canvas = this.FindControl<Canvas>("Canvas");
+            ScoreViewModel = (ScoreViewModel) DataContext;
         }
 
-        private Border CreateBorderImage(string source)
+        private Border CreateBorderImage(IBitmap source)
         {
-            var imageSource =
-                (Bitmap) BitmapValueConverter.Instance.Convert((string) source, new Bitmap("").GetType(), null, null);
             var border = new Border
-                {Child = new Image {Source = imageSource, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
+                {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
             return border;
         }
 
-        // private Border CreateBorderImage(IBitmap source)
-        // {
-        //     var border = new Border
-        //         {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
-        //     return border;
-        // }
-
-        private void DoRelease(object sender, PointerReleasedEventArgs e)
+        private void OnRelease(object sender, PointerReleasedEventArgs e)
         {
-            var point = e.GetPosition(LayoutTransformControl);
-            var ItemFromPanel = CreateBorderImage(Directory.GetCurrentDirectory() + "/assets/tonic/1_I.png");
-            Canvas.SetLeft(ItemFromPanel, point.X - 32);
-            Canvas.SetTop(ItemFromPanel, point.Y - 32);
-            Canvas.Children.Add(ItemFromPanel);
+            var dragAndDropContext = ScoreViewModel.DragAndDropContext;
+            if (dragAndDropContext.isDragging == false)
+                return;
+            var item = CreateBorderImage(new Bitmap(dragAndDropContext.SelectedImageSource));
+            var point = e.GetPosition(Canvas);
+            Canvas.SetLeft(item, point.X - 32);
+            Canvas.SetTop(item, point.Y - 32);
+            Canvas.Children.Add(item);
+            dragAndDropContext.isDragging = false;
         }
     }
 }

@@ -5,10 +5,10 @@ namespace ScoreAnalyser.ViewModels
 {
     public class DominantToolboxViewModel : MusicItemToolboxViewModel
     {
-        public DominantToolboxViewModel()
+        public DominantToolboxViewModel(DragAndDropContext dragAndDropContext)
         {
             Dominants = new ObservableCollection<MusicItemViewModel>(FindFiles("/Assets/png/dominant/")
-                .Select(f => new MusicItemViewModel(f)));
+                .Select(f => new MusicItemViewModel(f, dragAndDropContext)));
         }
 
         public ObservableCollection<MusicItemViewModel> Dominants { get; }

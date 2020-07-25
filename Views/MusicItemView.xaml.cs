@@ -20,5 +20,12 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+
+        public void OnClick(object sender, PointerPressedEventArgs args)
+        {
+            var vm = (MusicItemViewModel) DataContext;
+            vm.DragAndDropContext.isDragging = true;
+            vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
+        }
     }
 }

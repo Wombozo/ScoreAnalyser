@@ -41,23 +41,23 @@
                 </views:TonicToolboxView.DataContext>
             </views:TonicToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominants :" Grid.Row="2" />
-            <!-- <views:DominantToolboxView Grid.Row="3"> -->
-                <!-- <views:DominantToolboxView.DataContext> -->
-                    <!-- <Binding Path="DominantToolbox" /> -->
-                <!-- </views:DominantToolboxView.DataContext> -->
-            <!-- </views:DominantToolboxView> -->
+            <views:DominantToolboxView Grid.Row="3">
+                <views:DominantToolboxView.DataContext>
+                    <Binding Path="DominantToolbox" />
+                </views:DominantToolboxView.DataContext>
+            </views:DominantToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominants :" Grid.Row="4" />
-            <!-- <views:PredominantToolboxView Grid.Row="5"> -->
-                <!-- <views:PredominantToolboxView.DataContext> -->
-                    <!-- <Binding Path="PredominantToolbox" /> -->
-                <!-- </views:PredominantToolboxView.DataContext> -->
-            <!-- </views:PredominantToolboxView> -->
+            <views:PredominantToolboxView Grid.Row="5">
+                <views:PredominantToolboxView.DataContext>
+                    <Binding Path="PredominantToolbox" />
+                </views:PredominantToolboxView.DataContext>
+            </views:PredominantToolboxView>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Miscs :" Grid.Row="6" />
-            <!-- <views:MiscToolboxView Grid.Row="7"> -->
-                <!-- <views:MiscToolboxView.DataContext> -->
-                    <!-- <Binding Path="MiscToolbox" /> -->
-                <!-- </views:MiscToolboxView.DataContext> -->
-            <!-- </views:MiscToolboxView> -->
+            <views:MiscToolboxView Grid.Row="7">
+                <views:MiscToolboxView.DataContext>
+                    <Binding Path="MiscToolbox" />
+                </views:MiscToolboxView.DataContext>
+            </views:MiscToolboxView>
         </Grid>
         <views:ScoreView>
             <views:ScoreView.DataContext>

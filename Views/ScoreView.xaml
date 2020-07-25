@@ -15,7 +15,7 @@
             <!-- <LayoutTransformControl.LayoutTransform> -->
                 <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
             <!-- </LayoutTransformControl.LayoutTransform> -->
-            <Canvas MinWidth="600" Name="Canvas" Height="5000" Width="5000" />
+            <Canvas MinWidth="600" Name="Canvas" Height="5000" Width="5000" PointerReleased="OnRelease"/>
         <!-- </LayoutTransformControl> -->
     <!-- </ScrollViewer> -->
 

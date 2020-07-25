@@ -5,10 +5,10 @@ namespace ScoreAnalyser.ViewModels
 {
     public class MiscToolboxViewModel : MusicItemToolboxViewModel
     {
-        public MiscToolboxViewModel()
+        public MiscToolboxViewModel(DragAndDropContext dragAndDropContext)
         {
             Miscs = new ObservableCollection<MusicItemViewModel>(FindFiles("/Assets/png/misc/")
-                .Select(f => new MusicItemViewModel(f)));
+                .Select(f => new MusicItemViewModel(f, dragAndDropContext)));
         }
 
         public ObservableCollection<MusicItemViewModel> Miscs { get; }
