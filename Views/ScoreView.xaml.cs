@@ -21,9 +21,7 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             ScoreViewModel = (ScoreViewModel) DataContext;
-            var t = this.FindControl<Canvas>("Canvas");
-            // LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
-            t.PointerReleased += DoRelease;
+            Canvas = this.FindControl<Canvas>("Canvas");
         }
 
         private Border CreateBorderImage(string source)
