@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
 {
@@ -13,6 +14,8 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            var t = (TonicToolboxViewModel) DataContext;
+            var s = t.Tonics;
         }
     }
 }
