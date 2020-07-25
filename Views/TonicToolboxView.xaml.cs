@@ -11,11 +11,6 @@ namespace ScoreAnalyser.Views
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-            var t = (TonicToolboxViewModel) DataContext;
-            // var s = t.Tonics;
-        }
+        private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
     }
 }
