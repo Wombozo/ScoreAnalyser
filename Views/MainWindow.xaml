@@ -20,45 +20,51 @@
                 <MenuItem Header="Save" Command="{Binding Save}" />
             </MenuItem>
         </Menu>
-        <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="130" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="250" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="250" />
-                <RowDefinition Height="30" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonics :" Grid.Row="0" />
-            <views:TonicToolboxView Grid.Row="1">
-                <views:TonicToolboxView.DataContext>
-                    <Binding Path="TonicToolbox" />
-                </views:TonicToolboxView.DataContext>
-            </views:TonicToolboxView>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominants :" Grid.Row="2" />
-            <views:DominantToolboxView Grid.Row="3">
-                <views:DominantToolboxView.DataContext>
-                    <Binding Path="DominantToolbox" />
-                </views:DominantToolboxView.DataContext>
-            </views:DominantToolboxView>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominants :" Grid.Row="4" />
-            <views:PredominantToolboxView Grid.Row="5">
-                <views:PredominantToolboxView.DataContext>
-                    <Binding Path="PredominantToolbox" />
-                </views:PredominantToolboxView.DataContext>
-            </views:PredominantToolboxView>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Miscs :" Grid.Row="6" />
-            <views:MiscToolboxView Grid.Row="7">
-                <views:MiscToolboxView.DataContext>
-                    <Binding Path="MiscToolbox" />
-                </views:MiscToolboxView.DataContext>
-            </views:MiscToolboxView>
-        </Grid>
+        <TabControl>
+            <TabItem Header="Harmonies" VerticalContentAlignment="Center" >
+                <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="250" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="250" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonics :" Grid.Row="0" />
+                    <views:TonicToolboxView Grid.Row="1">
+                        <views:TonicToolboxView.DataContext>
+                            <Binding Path="TonicToolbox" />
+                        </views:TonicToolboxView.DataContext>
+                    </views:TonicToolboxView>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominants :" Grid.Row="2" />
+                    <views:DominantToolboxView Grid.Row="3">
+                        <views:DominantToolboxView.DataContext>
+                            <Binding Path="DominantToolbox" />
+                        </views:DominantToolboxView.DataContext>
+                    </views:DominantToolboxView>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominants :"
+                               Grid.Row="4" />
+                    <views:PredominantToolboxView Grid.Row="5">
+                        <views:PredominantToolboxView.DataContext>
+                            <Binding Path="PredominantToolbox" />
+                        </views:PredominantToolboxView.DataContext>
+                    </views:PredominantToolboxView>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Miscs :" Grid.Row="6" />
+                    <views:MiscToolboxView Grid.Row="7">
+                        <views:MiscToolboxView.DataContext>
+                            <Binding Path="MiscToolbox" />
+                        </views:MiscToolboxView.DataContext>
+                    </views:MiscToolboxView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Keys" VerticalContentAlignment="Center" />
+        </TabControl>
         <views:ScoreView>
             <views:ScoreView.DataContext>
                 <Binding Path="Score" />
