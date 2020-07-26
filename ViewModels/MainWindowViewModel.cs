@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Input;
+using Avalonia.Controls;
 
 namespace ScoreAnalyser.ViewModels
 {
@@ -24,7 +26,12 @@ namespace ScoreAnalyser.ViewModels
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
-        public object Open => throw new NotImplementedException();
+
+        public void Open(Window parentWindow)
+        {
+            var openFileDialog = new OpenFileDialog {Directory = "/home/guillaume"};
+            openFileDialog.ShowAsync(parentWindow);
+        }
 
         public object Save => throw new NotImplementedException();
     }
