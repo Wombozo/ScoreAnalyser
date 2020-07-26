@@ -31,7 +31,6 @@ namespace ScoreAnalyser.Views
                 return;
             vm.DragAndDropContext.IsDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
-            vm.DragAndDropContext.NotifyPressed(args);
         }
 
         private void OnRelease(object sender, PointerReleasedEventArgs args)
