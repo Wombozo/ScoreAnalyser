@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using DynamicData.Binding;
 using ScoreAnalyser.ViewModels;
@@ -30,10 +32,11 @@ namespace ScoreAnalyser.Views
             ScoreViewModel = (ScoreViewModel) DataContext;
             DragAndDropContext = ScoreViewModel.DragAndDropContext;
             DragAndDropContext.MouseReleased += OnRelease;
+            ScoreViewModel.AvailableScore += LoadScoreToCanvas;
         }
 
         private static Border CreateBorderImage(IBitmap source)
-            => new Border {Child = new Image {Source = source, Width = 50, Height = 50, Margin = Thickness.Parse("4")}};
+            => new Border {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
 
         private List<(Border, string)> ImagesOnBoard { get; set; }
         private DragAndDropContext DragAndDropContext { get; set; }
@@ -65,8 +68,8 @@ namespace ScoreAnalyser.Views
             if (DragAndDropContext.IsDragging == false)
                 return;
             var point = e.GetPosition(Canvas);
-            var x = point.X - 32;
-            var y = point.Y - 32;
+            var x = point.X - 64;
+            var y = point.Y - 64;
             if (!(x > 0) || !(y > 0)) return;
             AddImageOnScore(DragAndDropContext.SelectedImageSource, x, y);
             DragAndDropContext.IsDragging = false;
@@ -87,6 +90,14 @@ namespace ScoreAnalyser.Views
                     RemoveImageOfScore((border, DragAndDropContext.SelectedImageSource));
                     break;
             }
+        }
+
+        private void LoadScoreToCanvas(object sender, EventArgs evt)
+        {
+            var scores = ScoreViewModel.ScorePages;
+            var score = scores.First();
+            Canvas.Background = new ImageBrush(score);
+            DragAndDropContext.Authorized = true;
         }
     }
 }

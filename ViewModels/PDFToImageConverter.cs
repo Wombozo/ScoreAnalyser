@@ -12,14 +12,13 @@ namespace ScoreAnalyser.ViewModels
             var settings = new MagickReadSettings();
             // Settings the density to 300 dpi will create an image with a better quality
             //settings.Density = new Density(300, 300);
-
             using var images = new MagickImageCollection(PDFFile);
             images.Read(PDFFile, settings);
 
             var bmpImages = new List<Bitmap>();
             foreach (var image in images)
             {
-                var byteBuffer = image.ToByteArray();
+                var byteBuffer = image.ToByteArray(MagickFormat.Bmp);
                 var memoryStream = new MemoryStream(byteBuffer) {Position = 0};
                 bmpImages.Add(new Bitmap(memoryStream));
                 memoryStream.Close();
