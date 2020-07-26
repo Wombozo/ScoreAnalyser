@@ -18,7 +18,6 @@ namespace ScoreAnalyser.Views
             AvaloniaXamlLoader.Load(this);
             WindowState = WindowState.Maximized;
             KeyDown += KeyPressedScale;
-           // PDFToImageConverter.ConvertPDFToMultipleImages();
         }
 
         private void KeyPressedScale(object? sender, KeyEventArgs key)

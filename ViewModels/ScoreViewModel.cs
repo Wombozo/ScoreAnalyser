@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Avalonia.Input;
+using Avalonia.Media.Imaging;
 using ReactiveUI;
 
 namespace ScoreAnalyser.ViewModels
@@ -28,10 +29,9 @@ namespace ScoreAnalyser.ViewModels
         }
 
         public List<ImageOnScore> ImagesOnScore { get; set; }
+        public IEnumerable<Bitmap> ScorePages { get; set; }
 
-        public void SetScore(string scoreFileName)
-        {
-            
-        }
+        public void SetScore(string scoreFileName) =>
+            ScorePages = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName);
     }
 }
