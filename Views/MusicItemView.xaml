@@ -14,8 +14,8 @@
         <viewModels:MusicItemViewModel />
     </Design.DataContext>
 
-    <Border >
-        <Image Width="50" Height="50" Margin="4" Name="Test">
+    <Border Name="Border">
+        <Image Width="50" Height="50" Margin="4">
             <Image.Source>
                 <!-- ReSharper disable once Xaml.InvalidType -->
                 <Binding Path="ImagePath" Converter="{StaticResource bitmapConverter}" />

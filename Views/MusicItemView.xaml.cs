@@ -19,8 +19,9 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            PointerPressed += OnClick;
-            PointerReleased += OnRelease;
+            var border = this.FindControl<Border>("Border");
+            border.PointerPressed += OnClick;
+            border.PointerReleased += OnRelease;
         }
 
         private void OnClick(object sender, PointerPressedEventArgs args)
