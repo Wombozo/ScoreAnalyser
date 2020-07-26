@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows.Input;
+using System.Collections.Generic;
 using Avalonia.Controls;
 
 namespace ScoreAnalyser.ViewModels
@@ -29,7 +29,16 @@ namespace ScoreAnalyser.ViewModels
 
         public void Open(Window parentWindow)
         {
-            var openFileDialog = new OpenFileDialog {Directory = "/home/guillaume"};
+            var openFileDialog = new OpenFileDialog
+            {
+                Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
+                            Environment.OSVersion.Platform == PlatformID.MacOSX
+                    ? Environment.GetEnvironmentVariable("HOME")
+                    : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
+                Title = "Select PDF score"
+            };
+            var filter = new FileDialogFilter {Extensions = new List<string> {"pdf"}, Name = "PDF files"};
+            openFileDialog.Filters = new List<FileDialogFilter> {filter};
             openFileDialog.ShowAsync(parentWindow);
         }
 
