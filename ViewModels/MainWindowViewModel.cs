@@ -27,7 +27,7 @@ namespace ScoreAnalyser.ViewModels
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
-        public async Task Open(Window parentWindow)
+        public async Task ImportPDF(Window parentWindow)
         {
             var openFileDialog = new OpenFileDialog
             {
