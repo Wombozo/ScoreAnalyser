@@ -46,26 +46,25 @@ namespace ScoreAnalyser.Views
             var image = CreateBorderImage(new Bitmap(imageSource));
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
-            Canvas.Children.Add(image);
             image.PointerPressed += OnImagePressed;
             image.PointerReleased += OnRelease;
             ScoreViewModel.ImagesOnScore.Add(new ImageOnScore(imageSource, x, y));
             ImagesOnBoard.Add((image, imageSource));
+            Canvas.Children.Add(image);
         }
 
-        private void RemoveImageOfScore((Border Image, string Path) imageAndPath)
+        private void RemoveImageOfScore(IControl image)
         {
-            var index = ImagesOnBoard.IndexOf(imageAndPath);
+            var item = ImagesOnBoard.First(t => t.Item1.Equals(image));
+            var index = ImagesOnBoard.IndexOf(item);
             ScoreViewModel.ImagesOnScore.RemoveAt(index);
-            ImagesOnBoard.Remove(imageAndPath);
-            Canvas.Children.Remove(imageAndPath.Image);
+            ImagesOnBoard.Remove(item);
+            Canvas.Children.Remove(image);
         }
 
         private void OnRelease(object sender, EventArgs evt)
         {
-            if (!(evt is PointerReleasedEventArgs e))
-                return;
-            if (DragAndDropContext.IsDragging == false)
+            if (!(evt is PointerReleasedEventArgs e) || DragAndDropContext.IsDragging == false)
                 return;
             var point = e.GetPosition(Canvas);
             var x = point.X - 64;
@@ -87,7 +86,7 @@ namespace ScoreAnalyser.Views
                     DragAndDropContext.SelectedImageSource = imageAndPath.Item2;
                     break;
                 case InputModifiers.RightMouseButton:
-                    RemoveImageOfScore((border, DragAndDropContext.SelectedImageSource));
+                    RemoveImageOfScore(border);
                     break;
             }
         }

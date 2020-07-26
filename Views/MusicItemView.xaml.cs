@@ -36,7 +36,6 @@ namespace ScoreAnalyser.Views
         private void OnRelease(object sender, PointerReleasedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
-            vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
             vm.DragAndDropContext.NotifyReleased(args);
         }
     }
