@@ -28,5 +28,10 @@ namespace ScoreAnalyser.ViewModels
         }
 
         public List<ImageOnScore> ImagesOnScore { get; set; }
+
+        public void SetScore(string scoreFileName)
+        {
+            
+        }
     }
 }

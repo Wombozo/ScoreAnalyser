@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 
 namespace ScoreAnalyser.ViewModels
@@ -26,8 +27,7 @@ namespace ScoreAnalyser.ViewModels
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
-
-        public void Open(Window parentWindow)
+    public async Task Open(Window parentWindow)
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -35,11 +35,13 @@ namespace ScoreAnalyser.ViewModels
                             Environment.OSVersion.Platform == PlatformID.MacOSX
                     ? Environment.GetEnvironmentVariable("HOME")
                     : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
-                Title = "Select PDF score"
+                Title = "Select PDF score",
+                AllowMultiple = false
             };
             var filter = new FileDialogFilter {Extensions = new List<string> {"pdf"}, Name = "PDF files"};
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
-            openFileDialog.ShowAsync(parentWindow);
+            var result = await openFileDialog.ShowAsync(parentWindow);
+            Score.SetScore(result[0]);
         }
 
         public object Save => throw new NotImplementedException();
