@@ -74,9 +74,8 @@ namespace ScoreAnalyser.Views
 
         private void OnImagePressed(object sender, EventArgs evt)
         {
-            if (!(evt is PointerPressedEventArgs e))
+            if (!(evt is PointerPressedEventArgs e) || !(sender is Border border))
                 return;
-            var border = (Border) sender;
             switch (e.InputModifiers)
             {
                 case InputModifiers.LeftMouseButton:
