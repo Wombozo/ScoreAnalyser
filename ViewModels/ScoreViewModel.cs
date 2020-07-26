@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -34,10 +35,12 @@ namespace ScoreAnalyser.ViewModels
         public void SetScore(string scoreFileName)
         {
             ScorePages = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName);
-            NotifyAvailableScore(null);
+            var scorePages = ScorePages as Bitmap[] ?? ScorePages.ToArray();
+            var scoreSize = new ScoreSize(scorePages.First().PixelSize.Width, scorePages.First().PixelSize.Height);
+            NotifyAvailableScore(scoreSize);
         }
 
         public event EventHandler AvailableScore;
-        public void NotifyAvailableScore(EventArgs e) => AvailableScore?.Invoke(this, e);
+        private void NotifyAvailableScore(ScoreSize e) => AvailableScore?.Invoke(this, e);
     }
 }
