@@ -27,7 +27,9 @@ namespace ScoreAnalyser.Views
         private void OnClick(object sender, PointerPressedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
-            vm.DragAndDropContext.isDragging = true;
+            if (vm.DragAndDropContext.Authorized == false)
+                return;
+            vm.DragAndDropContext.IsDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
             vm.DragAndDropContext.NotifyPressed(args);
         }
@@ -35,7 +37,6 @@ namespace ScoreAnalyser.Views
         private void OnRelease(object sender, PointerReleasedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
-            vm.DragAndDropContext.isDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
             vm.DragAndDropContext.NotifyReleased(args);
         }

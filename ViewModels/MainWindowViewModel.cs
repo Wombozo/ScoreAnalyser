@@ -27,7 +27,7 @@ namespace ScoreAnalyser.ViewModels
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
-    public async Task Open(Window parentWindow)
+        public async Task Open(Window parentWindow)
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -50,7 +50,8 @@ namespace ScoreAnalyser.ViewModels
     public class DragAndDropContext
     {
         public string SelectedImageSource { get; set; }
-        public bool isDragging = false;
+        public bool IsDragging = false;
+        public bool Authorized = false;
         public event EventHandler MousePressed;
         public event EventHandler MouseReleased;
         public void NotifyPressed(EventArgs e) => MousePressed?.Invoke(this, e);

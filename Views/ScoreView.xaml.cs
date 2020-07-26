@@ -62,14 +62,14 @@ namespace ScoreAnalyser.Views
         {
             if (!(evt is PointerReleasedEventArgs e))
                 return;
-            if (DragAndDropContext.isDragging == false)
+            if (DragAndDropContext.IsDragging == false)
                 return;
             var point = e.GetPosition(Canvas);
             var x = point.X - 32;
             var y = point.Y - 32;
             if (!(x > 0) || !(y > 0)) return;
             AddImageOnScore(DragAndDropContext.SelectedImageSource, x, y);
-            DragAndDropContext.isDragging = false;
+            DragAndDropContext.IsDragging = false;
         }
 
         private void OnImagePressed(object sender, EventArgs evt)
@@ -79,7 +79,7 @@ namespace ScoreAnalyser.Views
             switch (e.InputModifiers)
             {
                 case InputModifiers.LeftMouseButton:
-                    DragAndDropContext.isDragging = true;
+                    DragAndDropContext.IsDragging = true;
                     var imageAndPath = ImagesOnBoard.Find(i => i.Item1.Equals(border));
                     DragAndDropContext.SelectedImageSource = imageAndPath.Item2;
                     break;
