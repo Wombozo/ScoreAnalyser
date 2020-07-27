@@ -18,12 +18,10 @@ namespace ScoreAnalyser.Views
         public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
         private Canvas Canvas { get; set; }
-        private LayoutTransformControl LayoutTransformControl { get; set; }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
             Canvas = this.FindControl<Canvas>("Canvas");
             DataContextChanged += WhenDataContextChanged;
             ImagesOnBoard = new List<(Border, string)>();
@@ -99,8 +97,6 @@ namespace ScoreAnalyser.Views
                 return;
             var scores = ScoreViewModel.ScorePages;
             var score = scores.First();
-            //Canvas = new Canvas {Width = e.Width, Height = e.Height};
-            //LayoutTransformControl.Child = Canvas;
             Canvas.Height = e.Height;
             Canvas.Width = e.Width;
             Canvas.Background = new ImageBrush(score);

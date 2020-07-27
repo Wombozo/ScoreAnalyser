@@ -17,13 +17,14 @@
     <DockPanel>
         <Menu Name="MainMenu" DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Import PDF Score" Command="{Binding Path=ImportPDF}" CommandParameter="{Binding ElementName=MainWindow}"  />
+                <MenuItem Header="Import PDF Score" Command="{Binding Path=ImportPDF}"
+                          CommandParameter="{Binding ElementName=MainWindow}" />
                 <Separator />
                 <MenuItem Header="Save as" />
             </MenuItem>
         </Menu>
         <TabControl>
-            <TabItem Header="Harmonies" VerticalContentAlignment="Center" >
+            <TabItem Header="Harmonies" VerticalContentAlignment="Center">
                 <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250" />
@@ -65,7 +66,31 @@
                     </views:MiscToolboxView>
                 </Grid>
             </TabItem>
-            <TabItem Header="Keys" VerticalContentAlignment="Center" />
+            <TabItem Header="Keys" VerticalContentAlignment="Center">
+                <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="400" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Major :" Grid.Row="0" />
+                    <views:KeyMajorToolboxView Grid.Row="1">
+                        <views:KeyMajorToolboxView.DataContext>
+                            <Binding Path="KeyMajorToolbox" />
+                        </views:KeyMajorToolboxView.DataContext>
+                    </views:KeyMajorToolboxView>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Minor :" Grid.Row="2" />
+                    <views:KeyMinorToolboxView Grid.Row="3">
+                        <views:KeyMinorToolboxView.DataContext>
+                            <Binding Path="KeyMinorToolbox" />
+                        </views:KeyMinorToolboxView.DataContext>
+                    </views:KeyMinorToolboxView>
+                </Grid>
+            </TabItem>
         </TabControl>
         <views:ScoreView>
             <views:ScoreView.DataContext>

@@ -19,6 +19,9 @@
     <Compile Update="Views\MusicItemView.xaml.cs">
       <DependentUpon>MusicItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\KeyMajorToolboxView.xaml.cs">
+      <DependentUpon>KeyMajorToolboxView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.9" />

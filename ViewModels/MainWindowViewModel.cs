@@ -14,6 +14,8 @@ namespace ScoreAnalyser.ViewModels
             TonicToolbox = new TonicToolboxViewModel(DragAndDropContext);
             PredominantToolbox = new PredominantToolboxViewModel(DragAndDropContext);
             MiscToolbox = new MiscToolboxViewModel(DragAndDropContext);
+            KeyMajorToolbox = new KeyMajorToolboxViewModel(DragAndDropContext);
+            KeyMinorToolbox = new KeyMinorToolboxViewModel(DragAndDropContext);
             Score = new ScoreViewModel(DragAndDropContext);
         }
 
@@ -21,6 +23,8 @@ namespace ScoreAnalyser.ViewModels
         public TonicToolboxViewModel TonicToolbox { get; }
         public PredominantToolboxViewModel PredominantToolbox { get; }
         public MiscToolboxViewModel MiscToolbox { get; }
+        public KeyMajorToolboxViewModel KeyMajorToolbox { get; }
+        public KeyMinorToolboxViewModel KeyMinorToolbox { get; }
         public ScoreViewModel Score { get; }
         public DragAndDropContext DragAndDropContext { get; }
 
