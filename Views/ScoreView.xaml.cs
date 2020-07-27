@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -17,14 +18,13 @@ namespace ScoreAnalyser.Views
     {
         public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
-        private Canvas Canvas { get; set; }
+        private Canvas CurrentCanvas { get; set; }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            Canvas = this.FindControl<Canvas>("Canvas");
             DataContextChanged += WhenDataContextChanged;
-            ImagesOnBoard = new List<(Border, string)>();
+            ImagesOnBoard = new List<(int, Border, string)>();
         }
 
         private void WhenDataContextChanged(object o, EventArgs args)
@@ -38,7 +38,7 @@ namespace ScoreAnalyser.Views
         private static Border CreateBorderImage(IBitmap source)
             => new Border {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
 
-        private List<(Border, string)> ImagesOnBoard { get; set; }
+        private List<(int, Border, string)> ImagesOnBoard { get; set; }
         private DragAndDropContext DragAndDropContext { get; set; }
 
         private void AddImageOnScore(string imageSource, double x, double y)
@@ -48,25 +48,25 @@ namespace ScoreAnalyser.Views
             Canvas.SetTop(image, y);
             image.PointerPressed += OnImagePressed;
             image.PointerReleased += OnRelease;
-            ScoreViewModel.ImagesOnScore.Add(new ImageOnScore(imageSource, x, y));
-            ImagesOnBoard.Add((image, imageSource));
-            Canvas.Children.Add(image);
+            ScoreViewModel.ImagesOnScore.Add(new ImageOnScore(TabControl.SelectedIndex, imageSource, x, y));
+            ImagesOnBoard.Add((TabControl.SelectedIndex, image, imageSource));
+            CurrentCanvas.Children.Add(image);
         }
 
         private void RemoveImageOfScore(IControl image)
         {
-            var item = ImagesOnBoard.First(t => t.Item1.Equals(image));
+            var item = ImagesOnBoard.First(t => t.Item2.Equals(image));
             var index = ImagesOnBoard.IndexOf(item);
             ScoreViewModel.ImagesOnScore.RemoveAt(index);
             ImagesOnBoard.Remove(item);
-            Canvas.Children.Remove(image);
+            CurrentCanvas.Children.Remove(image);
         }
 
         private void OnRelease(object sender, EventArgs evt)
         {
             if (!(evt is PointerReleasedEventArgs e) || DragAndDropContext.IsDragging == false)
                 return;
-            var point = e.GetPosition(Canvas);
+            var point = e.GetPosition(CurrentCanvas);
             var x = point.X - 64;
             var y = point.Y - 64;
             if (!(x > 0) || !(y > 0)) return;
@@ -83,7 +83,7 @@ namespace ScoreAnalyser.Views
                 case InputModifiers.LeftMouseButton:
                     DragAndDropContext.IsDragging = true;
                     var imageAndPath = ImagesOnBoard.Find(i => i.Item1.Equals(border));
-                    DragAndDropContext.SelectedImageSource = imageAndPath.Item2;
+                    DragAndDropContext.SelectedImageSource = imageAndPath.Item3;
                     break;
                 case InputModifiers.RightMouseButton:
                     RemoveImageOfScore(border);
@@ -91,15 +91,39 @@ namespace ScoreAnalyser.Views
             }
         }
 
+        private TabControl TabControl { get; set; }
+
+        private void TabItemChanged(object e, EventArgs evt) =>
+            CurrentCanvas = (Canvas)((TabItem) ((SelectionChangedEventArgs) evt).AddedItems[0])?.Content;
+
         private void LoadScoreToCanvas(object sender, EventArgs evt)
         {
             if (!(evt is ScoreSize e))
                 return;
-            var scores = ScoreViewModel.ScorePages;
-            var score = scores.First();
-            Canvas.Height = e.Height;
-            Canvas.Width = e.Width;
-            Canvas.Background = new ImageBrush(score);
+            var scorePages = ScoreViewModel.ScorePages;
+            TabControl = new TabControl();
+            TabControl.SelectionChanged += TabItemChanged;
+            var items = new List<TabItem>();
+            var scrollViewer = new ScrollViewer
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Content = TabControl
+            };
+            var i = 1;
+            foreach (var page in scorePages)
+            {
+                var tabItem = new TabItem {Header = "Page " + i};
+                var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
+                tabItem.Content = canvas;
+                items.Add(tabItem);
+                i++;
+            }
+
+            TabControl.Items = items;
+            scrollViewer.Content = TabControl;
+            CurrentCanvas = (Canvas) ((IEnumerable<TabItem>)TabControl.Items).First().Content;
+            Content = scrollViewer;
             DragAndDropContext.Authorized = true;
         }
     }

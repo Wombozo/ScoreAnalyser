@@ -6,11 +6,11 @@ namespace ScoreAnalyser
         public string Image { get; set; }
         public int Page { get; set; }
 
-        public ImageOnScore(string image, double x, double y)
+        public ImageOnScore(int page, string image, double x, double y)
         {
             Position = (x, y);
             Image = image;
-            //TODO: Page ?
+            Page = page;
         }
     }
 }
