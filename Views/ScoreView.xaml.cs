@@ -24,6 +24,7 @@ namespace ScoreAnalyser.Views
         {
             AvaloniaXamlLoader.Load(this);
             LayoutTransformControl = this.FindControl<LayoutTransformControl>("LayoutTransformControl");
+            Canvas = this.FindControl<Canvas>("Canvas");
             DataContextChanged += WhenDataContextChanged;
             ImagesOnBoard = new List<(Border, string)>();
         }
@@ -98,10 +99,10 @@ namespace ScoreAnalyser.Views
                 return;
             var scores = ScoreViewModel.ScorePages;
             var score = scores.First();
-            Canvas = new Canvas();
-            Canvas.Width = e.Width;
+            //Canvas = new Canvas {Width = e.Width, Height = e.Height};
+            //LayoutTransformControl.Child = Canvas;
             Canvas.Height = e.Height;
-            LayoutTransformControl.Child = Canvas;
+            Canvas.Width = e.Width;
             Canvas.Background = new ImageBrush(score);
             DragAndDropContext.Authorized = true;
         }

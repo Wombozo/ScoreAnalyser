@@ -11,6 +11,7 @@
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
             </LayoutTransformControl.LayoutTransform>
+            <Canvas MinWidth="200" Name="Canvas" />
         </LayoutTransformControl>
     </ScrollViewer>
 
