@@ -1,3 +1,5 @@
+using System;
+
 namespace ScoreAnalyser
 {
     public class ImageOnScore
@@ -11,6 +13,10 @@ namespace ScoreAnalyser
             Position = (x, y);
             Image = image;
             Page = page;
+        }
+
+        private ImageOnScore()
+        {
         }
     }
 }

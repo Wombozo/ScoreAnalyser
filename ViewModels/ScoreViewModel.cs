@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using Avalonia.Input;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -29,18 +33,22 @@ namespace ScoreAnalyser.ViewModels
             ImagesOnScore = new List<ImageOnScore>();
         }
 
+        private ScoreViewModel()
+        {
+        }
+
         public List<ImageOnScore> ImagesOnScore { get; set; }
-        public IEnumerable<Bitmap> ScorePages { get; set; }
+        [XmlIgnore] public Bitmap[] ScorePages { get; set; }
 
         public void SetScore(string scoreFileName)
         {
-            ScorePages = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName);
-            var scorePages = ScorePages as Bitmap[] ?? ScorePages.ToArray();
-            var scoreSize = new ScoreSize(scorePages.First().PixelSize.Width, scorePages.First().PixelSize.Height);
+            ScorePages = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
+            var scoreSize = new ScoreSize(ScorePages[0].PixelSize.Width, ScorePages[0].PixelSize.Height);
             NotifyAvailableScore(scoreSize);
         }
 
         public event EventHandler AvailableScore;
-        private void NotifyAvailableScore(ScoreSize e) => AvailableScore?.Invoke(this, e);
+        private void NotifyAvailableScore(EventArgs e) => AvailableScore?.Invoke(this, e);
+
     }
 }

@@ -20,7 +20,7 @@
                 <MenuItem Header="Import PDF Score" Command="{Binding Path=ImportPDF}"
                           CommandParameter="{Binding ElementName=MainWindow}" />
                 <Separator />
-                <MenuItem Header="Save as" />
+                <MenuItem Header="Save as" Command="{Binding Path=Save}"/>
             </MenuItem>
         </Menu>
         <TabControl>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 using Avalonia.Controls;
 
 namespace ScoreAnalyser.ViewModels
@@ -48,7 +51,17 @@ namespace ScoreAnalyser.ViewModels
             Score.SetScore(result[0]);
         }
 
-        public object Save => throw new NotImplementedException();
+        public void Save()
+        {
+            // if (Score.ScorePages == null) return;
+            var xsSubmit = new XmlSerializer(typeof(ScoreViewModel));
+
+            var sww = new StringWriter();
+            // sww.Write("afae");
+            var writer = new XmlTextWriter(sww) { Formatting = Formatting.Indented };
+            xsSubmit.Serialize(writer, Score);
+            var xml = sww.ToString();
+        }
     }
 
     public class DragAndDropContext

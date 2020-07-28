@@ -100,7 +100,7 @@ namespace ScoreAnalyser.Views
         {
             if (!(evt is ScoreSize e))
                 return;
-            var scorePages = ScoreViewModel.ScorePages;
+
             TabControl = new TabControl();
             TabControl.SelectionChanged += TabItemChanged;
             var items = new List<TabItem>();
@@ -111,7 +111,7 @@ namespace ScoreAnalyser.Views
                 Content = TabControl
             };
             var i = 1;
-            foreach (var page in scorePages)
+            foreach (var page in ScoreViewModel.ScorePages)
             {
                 var tabItem = new TabItem {Header = "Page " + i};
                 var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
@@ -119,7 +119,6 @@ namespace ScoreAnalyser.Views
                 items.Add(tabItem);
                 i++;
             }
-
             TabControl.Items = items;
             scrollViewer.Content = TabControl;
             CurrentCanvas = (Canvas) ((IEnumerable<TabItem>)TabControl.Items).First().Content;
