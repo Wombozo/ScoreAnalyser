@@ -94,7 +94,7 @@ namespace ScoreAnalyser.Views
         private TabControl TabControl { get; set; }
 
         private void TabItemChanged(object e, EventArgs evt) =>
-            CurrentCanvas = (Canvas)((TabItem) ((SelectionChangedEventArgs) evt).AddedItems[0])?.Content;
+            CurrentCanvas = (Canvas)((ScrollViewer)((TabItem) ((SelectionChangedEventArgs) evt).AddedItems[0])?.Content)?.Content;
 
         private void LoadScoreToCanvas(object sender, EventArgs evt)
         {
@@ -104,25 +104,25 @@ namespace ScoreAnalyser.Views
             TabControl = new TabControl();
             TabControl.SelectionChanged += TabItemChanged;
             var items = new List<TabItem>();
-            var scrollViewer = new ScrollViewer
-            {
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-                Content = TabControl
-            };
             var i = 1;
             foreach (var page in ScoreViewModel.ScorePages)
             {
                 var tabItem = new TabItem {Header = "Page " + i};
+                
                 var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
-                tabItem.Content = canvas;
+                var scrollViewer = new ScrollViewer
+                {
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    Content = canvas
+                };
+                tabItem.Content = scrollViewer;
                 items.Add(tabItem);
                 i++;
             }
             TabControl.Items = items;
-            scrollViewer.Content = TabControl;
-            CurrentCanvas = (Canvas) ((IEnumerable<TabItem>)TabControl.Items).First().Content;
-            Content = scrollViewer;
+            CurrentCanvas = (Canvas) ((ScrollViewer)((IEnumerable<TabItem>)TabControl.Items).First().Content).Content;
+            Content = TabControl;
             DragAndDropContext.Authorized = true;
         }
     }

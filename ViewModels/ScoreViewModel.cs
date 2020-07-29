@@ -40,8 +40,11 @@ namespace ScoreAnalyser.ViewModels
         public List<ImageOnScore> ImagesOnScore { get; set; }
         [XmlIgnore] public Bitmap[] ScorePages { get; set; }
 
+        private string ScoreFileName { get; set; }
+
         public void SetScore(string scoreFileName)
         {
+            ScoreFileName = scoreFileName;
             ScorePages = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
             var scoreSize = new ScoreSize(ScorePages[0].PixelSize.Width, ScorePages[0].PixelSize.Height);
             NotifyAvailableScore(scoreSize);
