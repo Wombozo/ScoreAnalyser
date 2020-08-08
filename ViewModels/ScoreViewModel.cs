@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using ScoreAnalyser.Models;
@@ -30,7 +32,7 @@ namespace ScoreAnalyser.ViewModels
         {
             ScorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
             ScorePagesVM = new ObservableCollection<ScorePageViewModel>();
-            //var scoreSize = new ScoreSize(ScorePagesBitmap[0].PixelSize.Width, ScorePagesBitmap[0].PixelSize.Height);
+            var scoreSize = new ScoreSize(ScorePagesBitmap[0].PixelSize.Width, ScorePagesBitmap[0].PixelSize.Height);
             var scorePages = new List<ScorePage>();
             NumberPages = ScorePagesBitmap.Length;
             for (var i = 0; i < NumberPages; i++)
@@ -39,14 +41,28 @@ namespace ScoreAnalyser.ViewModels
                 ScorePagesVM.Add(new ScorePageViewModel(i));
             }
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
-            CreateTabItems();
+            CreateTabItems(scoreSize);
         }
 
-        private void CreateTabItems()
+        private void CreateTabItems(ScoreSize scoreSize)
         {
             var tabPages = new List<TabItem>();
             for (var i = 0; i < NumberPages; i++)
-                tabPages.Add(new TabItem {Header = $"Page {i + 1}"});
+            {
+                var canvas = new Canvas {Width = scoreSize.Width, Height = scoreSize.Height, Background = new ImageBrush(ScorePagesBitmap[i])};
+                var scrollViewer = new ScrollViewer
+                {
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    Content = canvas
+                };
+                tabPages.Add(new TabItem
+                {
+                    Header = $"Page {i + 1}",
+                    Content = scrollViewer
+                });
+            }
+            
             TabItems = tabPages;
         }
     }
