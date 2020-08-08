@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing.Imaging;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Xml.Serialization;
-using Avalonia.Input;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using ScoreAnalyser.Models;
@@ -14,47 +10,44 @@ namespace ScoreAnalyser.ViewModels
 {
     public class ScoreViewModel : ViewModelBase
     {
-        public float Scaling
-        {
-            get => scaling;
-            set => this.RaiseAndSetIfChanged(ref scaling, value);
-        }
-
-        private float scaling = .5f;
-        public void IncreaseScaling() => Scaling += STEP_SCALING;
-
-        public void DecreaseScaling() => Scaling = Scaling - STEP_SCALING > 0 ? Scaling - STEP_SCALING : Scaling;
-
-        private const float STEP_SCALING = .5f;
-        public DragAndDropContext DragAndDropContext { get; set; }
-
         public ScoreViewModel(DragAndDropContext dragAndDropContext)
         {
-            DragAndDropContext = dragAndDropContext;
-            ImagesOnScore = new List<ImageOnScore>();
+            //DragAndDropContext = dragAndDropContext;
+            // CREONS LES PAGES?
         }
-
-        private ScoreViewModel()
-        {
-        }
-
-        public List<ImageOnScore> ImagesOnScore { get; set; }
-        [XmlIgnore] public Bitmap[] ScorePagesBitmap { get; set; }
         public ScoreBoard ScoreBoard { get; set; }
+        public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
+        public Bitmap[] ScorePagesBitmap { get; set; }
+        public int NumberPages { get; set; }
+        public List<TabItem> TabItems
+        {
+            get => tabItems;
+            set => this.RaiseAndSetIfChanged(ref tabItems, value);
+        }
+        private List<TabItem> tabItems;
 
         public void SetNewScore(string scoreFileName)
         {
             ScorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
-            var scoreSize = new ScoreSize(ScorePagesBitmap[0].PixelSize.Width, ScorePagesBitmap[0].PixelSize.Height);
-            NotifyAvailableScore(scoreSize);
+            ScorePagesVM = new ObservableCollection<ScorePageViewModel>();
+            //var scoreSize = new ScoreSize(ScorePagesBitmap[0].PixelSize.Width, ScorePagesBitmap[0].PixelSize.Height);
             var scorePages = new List<ScorePage>();
-            for (var i = 0; i < ScorePagesBitmap.Length; i++)
+            NumberPages = ScorePagesBitmap.Length;
+            for (var i = 0; i < NumberPages; i++)
+            {
                 scorePages.Add(new ScorePage(i));
+                ScorePagesVM.Add(new ScorePageViewModel(i));
+            }
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
+            CreateTabItems();
         }
 
-        public event EventHandler AvailableScore;
-        private void NotifyAvailableScore(EventArgs e) => AvailableScore?.Invoke(this, e);
-
+        private void CreateTabItems()
+        {
+            var tabPages = new List<TabItem>();
+            for (var i = 0; i < NumberPages; i++)
+                tabPages.Add(new TabItem {Header = $"Page {i + 1}"});
+            TabItems = tabPages;
+        }
     }
 }

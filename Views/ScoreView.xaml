@@ -4,15 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:ScoreAnalyser.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ScoreAnalyser.Views.ScoreView" >
+             x:Class="ScoreAnalyser.Views.ScoreView">
 
+    <Design.DataContext>
+        <viewModels:ScoreViewModel />
+    </Design.DataContext>
+
+    <TabControl>
+        <TabControl.Items>
+            <Binding Path="TabItems" />
+        </TabControl.Items>
+    </TabControl>
     <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> -->
-        <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
-            <!-- <LayoutTransformControl.LayoutTransform> -->
-                <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
-            <!-- </LayoutTransformControl.LayoutTransform> -->
-            <!-- <Canvas MinWidth="200" Name="Canvas" /> -->
-        <!-- </LayoutTransformControl> -->
+    <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
+    <!-- <LayoutTransformControl.LayoutTransform> -->
+    <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
+    <!-- </LayoutTransformControl.LayoutTransform> -->
+    <!-- <Canvas MinWidth="200" Name="Canvas" /> -->
+    <!-- </LayoutTransformControl> -->
     <!-- </ScrollViewer> -->
 
 </UserControl>

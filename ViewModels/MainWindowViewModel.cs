@@ -31,8 +31,8 @@ namespace ScoreAnalyser.ViewModels
         public ScoreViewModel Score { get; }
         public DragAndDropContext DragAndDropContext { get; }
 
-        public void IncreaseScaling() => Score.IncreaseScaling();
-        public void DecreaseScaling() => Score.DecreaseScaling();
+        // public void IncreaseScaling() => Score.IncreaseScaling();
+        // public void DecreaseScaling() => Score.DecreaseScaling();
 
         public async Task ImportPDF(Window parentWindow)
         {
@@ -55,7 +55,7 @@ namespace ScoreAnalyser.ViewModels
         {
             // if (Score.ScorePages == null) return;
             var xsSubmit = new XmlSerializer(typeof(ScoreViewModel));
-
+        
             var sww = new StringWriter();
             // sww.Write("afae");
             var writer = new XmlTextWriter(sww) { Formatting = Formatting.Indented };
