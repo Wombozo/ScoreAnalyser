@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Dialogs;
 using Avalonia.Logging.Serilog;
 using Avalonia.ReactiveUI;
 
@@ -17,6 +18,7 @@ namespace ScoreAnalyser
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .LogToDebug()
+                .UseManagedSystemDialogs()
                 .UseReactiveUI();
     }
 }
