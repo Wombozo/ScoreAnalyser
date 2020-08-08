@@ -9,7 +9,7 @@ namespace ScoreAnalyser.Models
         public List<MusicItem> MusicItems { get; set; }
         public int PageNumber { get; set; }
 
-        public ScorePage(IEnumerable<MusicItem> musicItems, int pageNumber) : this(1, musicItems, pageNumber)
+        public ScorePage(int pageNumber) : this(1, null, pageNumber)
         {
         }
 

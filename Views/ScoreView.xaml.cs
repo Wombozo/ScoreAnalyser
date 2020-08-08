@@ -105,7 +105,7 @@ namespace ScoreAnalyser.Views
             TabControl.SelectionChanged += TabItemChanged;
             var items = new List<TabItem>();
             var i = 1;
-            foreach (var page in ScoreViewModel.ScorePages)
+            foreach (var page in ScoreViewModel.ScorePagesBitmap)
             {
                 var tabItem = new TabItem {Header = "Page " + i};
                 

@@ -48,7 +48,7 @@ namespace ScoreAnalyser.ViewModels
             var filter = new FileDialogFilter {Extensions = new List<string> {"pdf"}, Name = "PDF files"};
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await openFileDialog.ShowAsync(parentWindow);
-            Score.SetScore(result[0]);
+            Score.SetNewScore(result[0]);
         }
 
         public void Save()

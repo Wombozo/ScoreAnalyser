@@ -11,7 +11,7 @@ namespace ScoreAnalyser.Tests
         public void FillPropertiesWhenAddingItem()
         {
             var musicItems = new []{new MusicItem("/random/item/path", 1, 2)};
-            var page1 = new ScorePage(musicItems, 0);
+            var page1 = new ScorePage(0);
             var scoreBoard = new ScoreBoard("/random/pdf/path", new [] {page1});
             scoreBoard.ScorePages[0].AddMusicItem("/random/other/item/path", 2, 3);
             Check.That(scoreBoard.ScorePages[0].Scaling).Equals(1);
