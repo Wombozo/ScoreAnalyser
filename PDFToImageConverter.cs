@@ -3,7 +3,7 @@ using System.IO;
 using Avalonia.Media.Imaging;
 using ImageMagick;
 
-namespace ScoreAnalyser.ViewModels
+namespace ScoreAnalyser
 {
     public static class PDFToImageConverter
     {
