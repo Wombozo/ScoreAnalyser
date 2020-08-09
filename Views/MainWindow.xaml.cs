@@ -22,15 +22,15 @@ namespace ScoreAnalyser.Views
 
         private void KeyPressedScale(object? sender, KeyEventArgs key)
         {
-            // switch (key.Key)
-            // {
-            //     case Key.Add:
-            //         ((MainWindowViewModel)DataContext).IncreaseScaling();
-            //         break;
-            //     case Key.Subtract:
-            //         ((MainWindowViewModel)DataContext).DecreaseScaling();
-            //         break;
-            // }
+            switch (key.Key)
+            {
+                case Key.Add:
+                    ((MainWindowViewModel)DataContext).IncreaseScaling();
+                    break;
+                case Key.Subtract:
+                    ((MainWindowViewModel)DataContext).DecreaseScaling();
+                    break;
+            }
         }
     }
 

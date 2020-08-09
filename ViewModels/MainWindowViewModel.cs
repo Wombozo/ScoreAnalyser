@@ -31,8 +31,8 @@ namespace ScoreAnalyser.ViewModels
         public ScoreViewModel Score { get; }
         public DragAndDropContext DragAndDropContext { get; }
 
-        // public void IncreaseScaling() => Score.IncreaseScaling();
-        // public void DecreaseScaling() => Score.DecreaseScaling();
+        public void IncreaseScaling() => Score.IncreaseScaling();
+        public void DecreaseScaling() => Score.DecreaseScaling();
         public bool ProgressBarVisible { get; set; }
 
         public async Task ImportPDF(Window parentWindow)

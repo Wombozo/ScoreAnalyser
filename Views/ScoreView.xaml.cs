@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using ScoreAnalyser.ViewModels;
@@ -14,16 +15,18 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            // DataContextChanged += WhenDataContextChanged;
+            DataContextChanged += WhenDataContextChanged;
         }
 
-        // private void WhenDataContextChanged(object o, EventArgs args)
-        // {
-        //     ScoreViewModel = (ScoreViewModel) DataContext;
-        //     // DragAndDropContext = ScoreViewModel.DragAndDropContext;
-        //     // DragAndDropContext.MouseReleased += OnRelease;
-        //     // ScoreViewModel.AvailableScore += LoadScoreToCanvas;
-        // }
+        private void WhenDataContextChanged(object o, EventArgs args)
+        {
+            ScoreViewModel = (ScoreViewModel) DataContext;
+            TabControl = this.FindControl<TabControl>("TabControl");
+            TabControl.SelectionChanged += TabItemChanged;
+            // DragAndDropContext = ScoreViewModel.DragAndDropContext;
+            // DragAndDropContext.MouseReleased += OnRelease;
+            // ScoreViewModel.AvailableScore += LoadScoreToCanvas;
+        }
 
         // private static Border CreateBorderImage(IBitmap source)
         //     => new Border {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
@@ -83,8 +86,7 @@ namespace ScoreAnalyser.Views
 
         // private TabControl TabControl { get; set; }
 
-        // private void TabItemChanged(object e, EventArgs evt) =>
-        //     CurrentCanvas = (Canvas)((ScrollViewer)((TabItem) ((SelectionChangedEventArgs) evt).AddedItems[0])?.Content)?.Content;
+        private void TabItemChanged(object e, EventArgs evt) => ScoreViewModel.SelectedPageViewModel = (ScorePageViewModel)((TabControl) e).SelectedContent;
 
         // private void LoadScoreToCanvas(object sender, EventArgs evt)
         // {

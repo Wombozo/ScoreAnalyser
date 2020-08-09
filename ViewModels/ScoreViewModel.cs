@@ -12,10 +12,16 @@ namespace ScoreAnalyser.ViewModels
             ScorePagesVMTabItem = new ObservableCollection<ScorePageViewModel>();
             DragAndDropContext = dragAndDropContext;
         }
+
         public ScoreBoard ScoreBoard { get; set; }
         public ObservableCollection<ScorePageViewModel> ScorePagesVMTabItem { get; set; }
+        public ScorePageViewModel SelectedPageViewModel { get; set; }
         public int NumberPages { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
+
+        public void IncreaseScaling() => SelectedPageViewModel?.IncreaseScaling();
+
+        public void DecreaseScaling() => SelectedPageViewModel?.DecreaseScaling();
 
         public void SetNewScore(string scoreFileName)
         {
@@ -25,8 +31,10 @@ namespace ScoreAnalyser.ViewModels
             for (var i = 0; i < NumberPages; i++)
             {
                 scorePages.Add(new ScorePage(i));
-                ScorePagesVMTabItem.Add(new ScorePageViewModel{PageNumber = i+1, BackgroundBitmap = scorePagesBitmap[i]});
+                ScorePagesVMTabItem.Add(new ScorePageViewModel
+                    {PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i]});
             }
+
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
         }
     }
