@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Models
 {

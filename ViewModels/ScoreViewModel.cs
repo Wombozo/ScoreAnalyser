@@ -10,10 +10,12 @@ namespace ScoreAnalyser.ViewModels
         public ScoreViewModel(DragAndDropContext dragAndDropContext)
         {
             ScorePagesVMTabItem = new ObservableCollection<ScorePageViewModel>();
+            DragAndDropContext = dragAndDropContext;
         }
         public ScoreBoard ScoreBoard { get; set; }
         public ObservableCollection<ScorePageViewModel> ScorePagesVMTabItem { get; set; }
         public int NumberPages { get; set; }
+        public DragAndDropContext DragAndDropContext { get; }
 
         public void SetNewScore(string scoreFileName)
         {
