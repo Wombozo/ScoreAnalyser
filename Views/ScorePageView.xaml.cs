@@ -17,10 +17,10 @@ namespace ScoreAnalyser.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            DataContextChanged += WhenDataContextChanged;
+            DataContextChanged += WhenDataContextChanges;
         }
 
-        private void WhenDataContextChanged(object o, EventArgs args)
+        private void WhenDataContextChanges(object o, EventArgs args)
         {
             ScorePageViewModel = (ScorePageViewModel) DataContext;
             Canvas = this.FindControl<Canvas>("Canvas");
@@ -30,14 +30,19 @@ namespace ScoreAnalyser.Views
 
         private Canvas Canvas { get; set; }
         private ScorePageViewModel ScorePageViewModel { get; set; }
-        private static Border CreateBorderImage(IBitmap source)
-            => new Border
-                {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
+
+        private MusicItemView CreateMusicItem(string source)
+            => new MusicItemView
+            {
+                MusicItemViewModel = new MusicItemViewModel(source, DragAndDropContext)
+            };
+
+        // {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
         private DragAndDropContext DragAndDropContext { get; set; }
 
         private void AddImageOnScore(string imageSource, double x, double y)
         {
-            var image = CreateBorderImage(new Bitmap(imageSource));
+            var image = CreateMusicItem(imageSource);
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
             image.PointerPressed += OnImagePressed;

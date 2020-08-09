@@ -16,14 +16,20 @@ namespace ScoreAnalyser.Views
             InitializeComponent();
         }
 
+        public MusicItemViewModel MusicItemViewModel { get; set; }
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
             var border = this.FindControl<Border>("Border");
+            DataContextChanged += WhenDataContextChanges;
             border.PointerPressed += OnClick;
             border.PointerReleased += OnRelease;
         }
 
+        private void WhenDataContextChanges(object o, EventArgs args)
+        {
+            MusicItemViewModel = (MusicItemViewModel) DataContext;
+        }
         private void OnClick(object sender, PointerPressedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
