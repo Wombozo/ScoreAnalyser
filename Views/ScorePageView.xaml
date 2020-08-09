@@ -9,13 +9,16 @@
         <viewModels:ScorePageViewModel />
     </Design.DataContext>
 
-    <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> -->
-        <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
-            <!-- <LayoutTransformControl.LayoutTransform> -->
-                <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
-            <!-- </LayoutTransformControl.LayoutTransform> -->
-            <!-- <Canvas MinWidth="200" Background="{Binding Path=Background}" /> -->
-    <TextBlock Text="Hello" />
-        <!-- </LayoutTransformControl> -->
-    <!-- </ScrollViewer> -->
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <LayoutTransformControl Name="LayoutTransformControl">
+            <LayoutTransformControl.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
+            </LayoutTransformControl.LayoutTransform>
+            <Canvas >
+                <Canvas.Background>
+                    <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
+                </Canvas.Background>
+            </Canvas>
+        </LayoutTransformControl>
+    </ScrollViewer>
 </UserControl>
