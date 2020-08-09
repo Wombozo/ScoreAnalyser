@@ -1,15 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using DynamicData.Binding;
 using ScoreAnalyser.ViewModels;
 
 namespace ScoreAnalyser.Views
@@ -19,12 +9,12 @@ namespace ScoreAnalyser.Views
         public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
         private Canvas CurrentCanvas { get; set; }
+        private TabControl TabControl { get; set; }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
             // DataContextChanged += WhenDataContextChanged;
-            // ImagesOnBoard = new List<(int, Border, string)>();
         }
 
         // private void WhenDataContextChanged(object o, EventArgs args)
@@ -32,7 +22,7 @@ namespace ScoreAnalyser.Views
         //     ScoreViewModel = (ScoreViewModel) DataContext;
         //     // DragAndDropContext = ScoreViewModel.DragAndDropContext;
         //     // DragAndDropContext.MouseReleased += OnRelease;
-        //     ScoreViewModel.AvailableScore += LoadScoreToCanvas;
+        //     // ScoreViewModel.AvailableScore += LoadScoreToCanvas;
         // }
 
         // private static Border CreateBorderImage(IBitmap source)
@@ -96,35 +86,35 @@ namespace ScoreAnalyser.Views
         // private void TabItemChanged(object e, EventArgs evt) =>
         //     CurrentCanvas = (Canvas)((ScrollViewer)((TabItem) ((SelectionChangedEventArgs) evt).AddedItems[0])?.Content)?.Content;
 
-        private void LoadScoreToCanvas(object sender, EventArgs evt)
-        {
-            //     if (!(evt is ScoreSize e))
-            //         return;
-            //
-            //     TabControl = new TabControl();
-            //     TabControl.SelectionChanged += TabItemChanged;
-            //     var items = new List<TabItem>();
-            //     var i = 1;
-            //     foreach (var page in ScoreViewModel.ScorePagesBitmap)
-            //     {
-            //         var tabItem = new TabItem {Header = "Page " + i};
-            //         
-            //         var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
-            //         var scrollViewer = new ScrollViewer
-            //         {
-            //             HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-            //             VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            //             Content = canvas
-            //         };
-            //         tabItem.Content = scrollViewer;
-            //         items.Add(tabItem);
-            //         i++;
-            //     }
-            //     TabControl.Items = items;
-            //     CurrentCanvas = (Canvas) ((ScrollViewer)((IEnumerable<TabItem>)TabControl.Items).First().Content).Content;
-            //     Content = TabControl;
-            //     DragAndDropContext.Authorized = true;
-            // }
-        }
+        // private void LoadScoreToCanvas(object sender, EventArgs evt)
+        // {
+        //         if (!(evt is ScoreSize e))
+        //             return;
+        //     
+        //         TabControl = new TabControl();
+        //         TabControl.SelectionChanged += TabItemChanged;
+        //         var items = new List<TabItem>();
+        //         var i = 1;
+        //         foreach (var page in ScoreViewModel.ScorePagesBitmap)
+        //         {
+        //             var tabItem = new TabItem {Header = "Page " + i};
+        //             
+        //             var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
+        //             var scrollViewer = new ScrollViewer
+        //             {
+        //                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+        //                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+        //                 Content = canvas
+        //             };
+        //             tabItem.Content = scrollViewer;
+        //             items.Add(tabItem);
+        //             i++;
+        //         }
+        //         TabControl.Items = items;
+        //         CurrentCanvas = (Canvas) ((ScrollViewer)((IEnumerable<TabItem>)TabControl.Items).First().Content).Content;
+        //         Content = TabControl;
+        //         DragAndDropContext.Authorized = true;
+        //     }
+        // }
     }
 }

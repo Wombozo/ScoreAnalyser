@@ -10,18 +10,18 @@
         <viewModels:ScoreViewModel />
     </Design.DataContext>
 
-    <TabControl>
-        <TabControl.Items>
-            <Binding Path="TabItems" />
-        </TabControl.Items>
+    <TabControl Items="{Binding Path=ScorePagesVMTabItem}">
+        <TabControl.ItemTemplate>
+            <DataTemplate >
+                <TextBlock Text="{Binding Path=Header}" />
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+            <!-- this is the body of the TabItem template-->
+            <DataTemplate>
+                <TextBlock
+                    Text="{Binding Path=Content}" />
+            </DataTemplate>
+        </TabControl.ContentTemplate>
     </TabControl>
-    <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> -->
-    <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
-    <!-- <LayoutTransformControl.LayoutTransform> -->
-    <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
-    <!-- </LayoutTransformControl.LayoutTransform> -->
-    <!-- <Canvas MinWidth="200" Name="Canvas" /> -->
-    <!-- </LayoutTransformControl> -->
-    <!-- </ScrollViewer> -->
-
 </UserControl>

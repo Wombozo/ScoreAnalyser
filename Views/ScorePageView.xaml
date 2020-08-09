@@ -2,7 +2,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ScoreAnalyser.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ScoreAnalyser.Views.ScorePageView">
-  Welcome to Avalonia!
+    <Design.DataContext>
+        <viewModels:ScorePageViewModel />
+    </Design.DataContext>
+
+    <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"> -->
+        <!-- <LayoutTransformControl Name="LayoutTransformControl"> -->
+            <!-- <LayoutTransformControl.LayoutTransform> -->
+                <!-- <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" /> -->
+            <!-- </LayoutTransformControl.LayoutTransform> -->
+            <!-- <Canvas MinWidth="200" Background="{Binding Path=Background}" /> -->
+    <TextBlock Text="Hello" />
+        <!-- </LayoutTransformControl> -->
+    <!-- </ScrollViewer> -->
 </UserControl>
