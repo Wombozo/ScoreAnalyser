@@ -31,11 +31,7 @@ namespace ScoreAnalyser.Views
         private Canvas Canvas { get; set; }
         private ScorePageViewModel ScorePageViewModel { get; set; }
 
-        private MusicItemView CreateMusicItem(string source)
-            => new MusicItemView
-            {
-                MusicItemViewModel = new MusicItemViewModel(source, DragAndDropContext)
-            };
+        private MusicItemView CreateMusicItem(string source) => new MusicItemView(new MusicItemViewModel(source, DragAndDropContext));
 
         // {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
         private DragAndDropContext DragAndDropContext { get; set; }
@@ -64,8 +60,8 @@ namespace ScoreAnalyser.Views
             if (!(evt is PointerReleasedEventArgs e) || DragAndDropContext.IsDragging == false)
                 return;
             var point = e.GetPosition(Canvas);
-            var x = point.X - 64;
-            var y = point.Y - 64;
+            var x = point.X - 32;
+            var y = point.Y - 32;
             if (!(x > 0) || !(y > 0)) return;
             AddImageOnScore(DragAndDropContext.SelectedImageSource, x, y);
             DragAndDropContext.IsDragging = false;
