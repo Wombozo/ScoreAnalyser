@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 
@@ -5,6 +6,10 @@ namespace ScoreAnalyser.ViewModels
 {
     public class ScorePageViewModel : ViewModelBase
     {
+        public ScorePageViewModel()
+        {
+            ImagesOnScore = new List<ImageOnScore>();
+        }
         public int PageNumber { get; set; }
         public float Scaling
         {
@@ -17,7 +22,8 @@ namespace ScoreAnalyser.ViewModels
         public void DecreaseScaling() => Scaling = Scaling - STEP_SCALING > 0 ? Scaling - STEP_SCALING : Scaling;
 
         private const float STEP_SCALING = .5f;
-        // public List<ImageOnScore> ImagesOnScore { get; set; }
+        public ScoreViewModel ScoreViewModel { get; set; }
+        public List<ImageOnScore> ImagesOnScore { get; set; }
         public Bitmap BackgroundBitmap { get; set; }
     }
 }

@@ -32,10 +32,11 @@ namespace ScoreAnalyser.ViewModels
             {
                 scorePages.Add(new ScorePage(i));
                 ScorePagesVMTabItem.Add(new ScorePageViewModel
-                    {PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i]});
+                    {PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i], ScoreViewModel = this});
             }
 
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
+            DragAndDropContext.Authorized = true;
         }
     }
 }

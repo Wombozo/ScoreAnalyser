@@ -14,8 +14,8 @@
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
             </LayoutTransformControl.LayoutTransform>
-            <Canvas >
-                <Canvas.Background>
+            <Canvas Name="Canvas" >
+                <Canvas.Background >
                     <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
                 </Canvas.Background>
             </Canvas>

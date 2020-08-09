@@ -9,7 +9,6 @@ namespace ScoreAnalyser.Views
     {
         public ScoreView() => InitializeComponent();
         private ScoreViewModel ScoreViewModel { get; set; }
-        private Canvas CurrentCanvas { get; set; }
         private TabControl TabControl { get; set; }
 
         private void InitializeComponent()
@@ -17,106 +16,12 @@ namespace ScoreAnalyser.Views
             AvaloniaXamlLoader.Load(this);
             DataContextChanged += WhenDataContextChanged;
         }
-
         private void WhenDataContextChanged(object o, EventArgs args)
         {
             ScoreViewModel = (ScoreViewModel) DataContext;
             TabControl = this.FindControl<TabControl>("TabControl");
             TabControl.SelectionChanged += TabItemChanged;
-            // DragAndDropContext = ScoreViewModel.DragAndDropContext;
-            // DragAndDropContext.MouseReleased += OnRelease;
-            // ScoreViewModel.AvailableScore += LoadScoreToCanvas;
         }
-
-        // private static Border CreateBorderImage(IBitmap source)
-        //     => new Border {Child = new Image {Source = source, Width = 128, Height = 128, Margin = Thickness.Parse("4")}};
-
-        // private List<(int, Border, string)> ImagesOnBoard { get; set; }
-        // private DragAndDropContext DragAndDropContext { get; set; }
-
-        // private void AddImageOnScore(string imageSource, double x, double y)
-        // {
-        //     var image = CreateBorderImage(new Bitmap(imageSource));
-        //     Canvas.SetLeft(image, x);
-        //     Canvas.SetTop(image, y);
-        //     image.PointerPressed += OnImagePressed;
-        //     image.PointerReleased += OnRelease;
-        //     ScoreViewModel.ImagesOnScore.Add(new ImageOnScore(TabControl.SelectedIndex, imageSource, x, y));
-        //     ImagesOnBoard.Add((TabControl.SelectedIndex, image, imageSource));
-        //     CurrentCanvas.Children.Add(image);
-        // }
-
-        // private void RemoveImageOfScore(IControl image)
-        // {
-        //     var item = ImagesOnBoard.First(t => t.Item2.Equals(image));
-        //     var index = ImagesOnBoard.IndexOf(item);
-        //     ScoreViewModel.ImagesOnScore.RemoveAt(index);
-        //     ImagesOnBoard.Remove(item);
-        //     CurrentCanvas.Children.Remove(image);
-        // }
-
-        // private void OnRelease(object sender, EventArgs evt)
-        // {
-        //     if (!(evt is PointerReleasedEventArgs e) || DragAndDropContext.IsDragging == false)
-        //         return;
-        //     var point = e.GetPosition(CurrentCanvas);
-        //     var x = point.X - 64;
-        //     var y = point.Y - 64;
-        //     if (!(x > 0) || !(y > 0)) return;
-        //     AddImageOnScore(DragAndDropContext.SelectedImageSource, x, y);
-        //     DragAndDropContext.IsDragging = false;
-        // }
-
-        // private void OnImagePressed(object sender, EventArgs evt)
-        // {
-        //     if (!(evt is PointerPressedEventArgs e) || !(sender is Border border))
-        //         return;
-        //     switch (e.InputModifiers)
-        //     {
-        //         case InputModifiers.LeftMouseButton:
-        //             DragAndDropContext.IsDragging = true;
-        //             var imageAndPath = ImagesOnBoard.Find(i => i.Item1.Equals(border));
-        //             DragAndDropContext.SelectedImageSource = imageAndPath.Item3;
-        //             break;
-        //         case InputModifiers.RightMouseButton:
-        //             RemoveImageOfScore(border);
-        //             break;
-        //     }
-        // }
-
-        // private TabControl TabControl { get; set; }
-
         private void TabItemChanged(object e, EventArgs evt) => ScoreViewModel.SelectedPageViewModel = (ScorePageViewModel)((TabControl) e).SelectedContent;
-
-        // private void LoadScoreToCanvas(object sender, EventArgs evt)
-        // {
-        //         if (!(evt is ScoreSize e))
-        //             return;
-        //     
-        //         TabControl = new TabControl();
-        //         TabControl.SelectionChanged += TabItemChanged;
-        //         var items = new List<TabItem>();
-        //         var i = 1;
-        //         foreach (var page in ScoreViewModel.ScorePagesBitmap)
-        //         {
-        //             var tabItem = new TabItem {Header = "Page " + i};
-        //             
-        //             var canvas = new Canvas {Width = e.Width, Height = e.Height, Background = new ImageBrush(page)};
-        //             var scrollViewer = new ScrollViewer
-        //             {
-        //                 HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-        //                 VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-        //                 Content = canvas
-        //             };
-        //             tabItem.Content = scrollViewer;
-        //             items.Add(tabItem);
-        //             i++;
-        //         }
-        //         TabControl.Items = items;
-        //         CurrentCanvas = (Canvas) ((ScrollViewer)((IEnumerable<TabItem>)TabControl.Items).First().Content).Content;
-        //         Content = TabControl;
-        //         DragAndDropContext.Authorized = true;
-        //     }
-        // }
     }
 }
