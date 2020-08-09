@@ -1,3 +1,4 @@
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -19,6 +20,7 @@ namespace ScoreAnalyser.Views
         }
 
         public MusicItemViewModel MusicItemViewModel { get; set; }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -26,11 +28,26 @@ namespace ScoreAnalyser.Views
             border.PointerPressed += OnClick;
             border.PointerReleased += OnRelease;
         }
+
         private void OnClick(object sender, PointerPressedEventArgs args)
         {
             var vm = (MusicItemViewModel) DataContext;
-            if (vm.DragAndDropContext.Authorized == false)
+            if (!(sender is Border border) || !vm.DragAndDropContext.Authorized)
                 return;
+            if (border.Parent.Parent is Canvas canvas && canvas.DataContext is ScorePageViewModel scorePageViewModel)
+            {
+                switch (args.InputModifiers)
+                {
+                    case InputModifiers.LeftMouseButton:
+                        vm.DragAndDropContext.IsDragging = true;
+                        var imageOnScore = scorePageViewModel.ImagesOnScore.Find(i => i.Image.Equals(vm.ImagePath));
+                        vm.DragAndDropContext.SelectedImageSource = imageOnScore.Image;
+                        break;
+                    case InputModifiers.RightMouseButton:
+                        RemoveImageOfScore(vm.ImagePath, scorePageViewModel, canvas);
+                        break;
+                }
+            }
             vm.DragAndDropContext.IsDragging = true;
             vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
         }
@@ -40,5 +57,13 @@ namespace ScoreAnalyser.Views
             var vm = (MusicItemViewModel) DataContext;
             vm.DragAndDropContext.NotifyReleased(args);
         }
+        
+        private void RemoveImageOfScore(string image, ScorePageViewModel scorePageViewModel, Canvas canvas)
+        {
+            var item = scorePageViewModel.ImagesOnScore.First(i => i.Image.Equals(image));
+            scorePageViewModel.ImagesOnScore.Remove(item);
+            canvas.Children.Remove(this);
+        }
+
     }
 }
