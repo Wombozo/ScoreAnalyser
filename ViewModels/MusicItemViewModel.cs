@@ -1,4 +1,6 @@
-﻿namespace ScoreAnalyser.ViewModels
+﻿using ScoreAnalyser.Models;
+
+namespace ScoreAnalyser.ViewModels
 {
     public class MusicItemViewModel : ViewModelBase
     {
@@ -6,17 +8,22 @@
         {
         }
 
-        public MusicItemViewModel(string imagePath)
+        public MusicItemViewModel(MusicItem musicItem)
         {
-            ImagePath = imagePath;
+            MusicItem = musicItem;
         }
 
-        public MusicItemViewModel(string imagePath, DragAndDropContext dragAndDropContext) : this(imagePath)
+        public MusicItemViewModel(string itemPath, DragAndDropContext dragAndDropContext)
+        {
+            DragAndDropContext = dragAndDropContext;
+            MusicItem = new MusicItem(itemPath);
+        }
+        public MusicItemViewModel(MusicItem musicItem, DragAndDropContext dragAndDropContext) : this(musicItem)
         {
             DragAndDropContext = dragAndDropContext;
         }
 
-        public string ImagePath { get; }
-        public DragAndDropContext DragAndDropContext { get; set; }
+        public MusicItem MusicItem { get; }
+        public DragAndDropContext DragAndDropContext { get; }
     }
 }

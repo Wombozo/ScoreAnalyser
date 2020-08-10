@@ -18,7 +18,7 @@
         <Image Width="50" Height="50" Margin="4">
             <Image.Source>
                 <!-- ReSharper disable once Xaml.InvalidType -->
-                <Binding Path="ImagePath" Converter="{StaticResource bitmapConverter}" />
+                <Binding Path="MusicItem.Path" Converter="{StaticResource bitmapConverter}" />
             </Image.Source>
         </Image>
     </Border>

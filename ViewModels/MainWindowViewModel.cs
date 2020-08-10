@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Avalonia.Controls;
+using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
 {
@@ -68,10 +69,13 @@ namespace ScoreAnalyser.ViewModels
 
     public class DragAndDropContext
     {
-        public string SelectedImageSource { get; set; }
+        // public string SelectedImageSource { get; set; }
+        public MusicItem MusicItem { get; set; }
         public bool IsDragging = false;
         public bool Authorized = false;
         public event EventHandler MouseReleased;
+        public event EventHandler MousePressed;
         public void NotifyReleased(EventArgs e) => MouseReleased?.Invoke(this, e);
+        public void NotifyPressed(EventArgs e) => MousePressed?.Invoke(this, e);
     }
 }

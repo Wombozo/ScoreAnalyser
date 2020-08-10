@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -34,22 +35,9 @@ namespace ScoreAnalyser.Views
             var vm = (MusicItemViewModel) DataContext;
             if (!(sender is Border border) || !vm.DragAndDropContext.Authorized)
                 return;
-            if (border.Parent.Parent is Canvas canvas && canvas.DataContext is ScorePageViewModel scorePageViewModel)
-            {
-                switch (args.InputModifiers)
-                {
-                    case InputModifiers.LeftMouseButton:
-                        vm.DragAndDropContext.IsDragging = true;
-                        var imageOnScore = scorePageViewModel.ImagesOnScore.Find(i => i.Image.Equals(vm.ImagePath));
-                        vm.DragAndDropContext.SelectedImageSource = imageOnScore.Image;
-                        break;
-                    case InputModifiers.RightMouseButton:
-                        RemoveImageOfScore(vm.ImagePath, scorePageViewModel, canvas);
-                        break;
-                }
-            }
             vm.DragAndDropContext.IsDragging = true;
-            vm.DragAndDropContext.SelectedImageSource = vm.ImagePath;
+            vm.DragAndDropContext.MusicItem = vm.MusicItem;
+            vm.DragAndDropContext.NotifyPressed(new PointerPressedContextEventArgs(args, border.Parent.Parent, this));
         }
 
         private void OnRelease(object sender, PointerReleasedEventArgs args)
@@ -57,13 +45,19 @@ namespace ScoreAnalyser.Views
             var vm = (MusicItemViewModel) DataContext;
             vm.DragAndDropContext.NotifyReleased(args);
         }
-        
-        private void RemoveImageOfScore(string image, ScorePageViewModel scorePageViewModel, Canvas canvas)
-        {
-            var item = scorePageViewModel.ImagesOnScore.First(i => i.Image.Equals(image));
-            scorePageViewModel.ImagesOnScore.Remove(item);
-            canvas.Children.Remove(this);
-        }
+    }
 
+    public class PointerPressedContextEventArgs : EventArgs
+    {
+        public PointerPressedEventArgs PointerPressedEventArgs { get; }
+        public IControl SenderGrandParent { get; }
+        public IControl Sender { get; }
+
+        public PointerPressedContextEventArgs(PointerPressedEventArgs pointerPressedEventArgs, IControl senderGrandParent, IControl sender)
+        {
+            PointerPressedEventArgs = pointerPressedEventArgs;
+            SenderGrandParent = senderGrandParent;
+            Sender = sender;
+        }
     }
 }
