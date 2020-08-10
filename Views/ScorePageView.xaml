@@ -9,16 +9,23 @@
         <viewModels:ScorePageViewModel />
     </Design.DataContext>
 
+
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <LayoutTransformControl Name="LayoutTransformControl">
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
             </LayoutTransformControl.LayoutTransform>
-            <Canvas Name="Canvas" >
-                <Canvas.Background >
-                    <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
-                </Canvas.Background>
-            </Canvas>
+            <ItemsControl Items="{Binding Path=MusicItemViewModels}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Canvas Name="Canvas" Width="500" Height="500">
+                            <Canvas.Background>
+                                <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
+                            </Canvas.Background>
+                        </Canvas>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </LayoutTransformControl>
     </ScrollViewer>
 </UserControl>

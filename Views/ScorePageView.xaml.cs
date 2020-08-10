@@ -23,7 +23,7 @@ namespace ScoreAnalyser.Views
             ScorePageViewModel = (ScorePageViewModel) DataContext;
             Canvas = this.FindControl<Canvas>("Canvas");
             DragAndDropContext = ScorePageViewModel.ScoreViewModel.DragAndDropContext;
-            DragAndDropContext.MouseReleased += OnRelease;
+            // DragAndDropContext.MouseReleased += OnRelease;
             DragAndDropContext.MousePressed += OnPress;
         }
 
@@ -40,16 +40,16 @@ namespace ScoreAnalyser.Views
             Canvas.SetTop(musicItemView, y);
             ScorePageViewModel.MusicItemViewModels.Add(newMusicItemViewModel);
             ScorePageViewModel.ScorePage.AddMusicItem(musicItem);
-            Canvas.Children.Add(musicItemView);
+            // Canvas.Children.Add(musicItemView);
         }
 
-        private void RemoveImageOfScore(IControl musicItemView)
-        {
-            var musicItemViewModel = ScorePageViewModel.MusicItemViewModels.First(i => i.MusicItem.Equals(DragAndDropContext.MusicItem));
-            ScorePageViewModel.MusicItemViewModels.Remove(musicItemViewModel);
-            ScorePageViewModel.ScorePage.RemoveMusicItem(musicItemViewModel.MusicItem);
-            Canvas.Children.Remove(musicItemView as MusicItemView);
-        }
+        // private void RemoveImageOfScore(IControl musicItemView)
+        // {
+        //     var musicItemViewModel = ScorePageViewModel.MusicItemViewModels.First(i => i.MusicItem.Equals(DragAndDropContext.MusicItem));
+        //     ScorePageViewModel.MusicItemViewModels.Remove(musicItemViewModel);
+        //     ScorePageViewModel.ScorePage.RemoveMusicItem(musicItemViewModel.MusicItem);
+        //     Canvas.Children.Remove(musicItemView as MusicItemView);
+        // }
 
         private void OnRelease(object sender, EventArgs args)
         {
@@ -75,15 +75,15 @@ namespace ScoreAnalyser.Views
                 case InputModifiers.LeftMouseButton:
                     DragAndDropContext.IsDragging = true;
                     var musicItem =
-                        ScorePageViewModel.MusicItemViewModels.Find(i =>
+                        ScorePageViewModel.MusicItemViewModels.First(i =>
                             i.MusicItem.Equals(DragAndDropContext.MusicItem));
                     DragAndDropContext.MusicItem = musicItem?.MusicItem;
                     break;
-                case InputModifiers.RightMouseButton:
-                    DragAndDropContext.IsDragging = false;
-                    var musicItemView = pointerPressedContextEventArgs.Sender;
-                    RemoveImageOfScore(musicItemView);
-                    break;
+                // case InputModifiers.RightMouseButton:
+                //     DragAndDropContext.IsDragging = false;
+                //     var musicItemView = pointerPressedContextEventArgs.Sender;
+                //     RemoveImageOfScore(musicItemView);
+                //     break;
             }
         }
     }

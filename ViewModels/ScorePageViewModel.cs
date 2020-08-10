@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using ScoreAnalyser.Models;
@@ -9,7 +10,8 @@ namespace ScoreAnalyser.ViewModels
     {
         public ScorePageViewModel()
         {
-            MusicItemViewModels = new List<MusicItemViewModel>();
+            MusicItemViewModels = new ObservableCollection<MusicItemViewModel>();
+            // MusicItemViewModels = new List<MusicItemViewModel>();
         }
         public int PageNumber { get; set; }
         public float Scaling
@@ -24,7 +26,9 @@ namespace ScoreAnalyser.ViewModels
 
         private const float STEP_SCALING = .5f;
         public ScoreViewModel ScoreViewModel { get; set; }
-        public List<MusicItemViewModel> MusicItemViewModels { get; }
+        // public List<MusicItemViewModel> MusicItemViewModels { get; }
+        public ObservableCollection<MusicItemViewModel> MusicItemViewModels { get; }
+
         public ScorePage ScorePage { get; set; }
         public Bitmap BackgroundBitmap { get; set; }
     }
