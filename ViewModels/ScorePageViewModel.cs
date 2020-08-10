@@ -24,7 +24,8 @@ namespace ScoreAnalyser.ViewModels
 
         private const float STEP_SCALING = .5f;
         public ScoreViewModel ScoreViewModel { get; set; }
-        public List<MusicItemViewModel> MusicItemViewModels { get; set; }
+        public List<MusicItemViewModel> MusicItemViewModels { get; }
+        public ScorePage ScorePage { get; set; }
         public Bitmap BackgroundBitmap { get; set; }
     }
 }

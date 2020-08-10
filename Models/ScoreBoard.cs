@@ -5,8 +5,8 @@ namespace ScoreAnalyser.Models
 {
     public class ScoreBoard : ModelBase
     {
-        public ScorePage[] ScorePages { get; set; }
-        public string PdfPath { get; set; }
+        public ScorePage[] ScorePages { get; }
+        public string PdfPath { get; }
         public ScoreBoard(string pdfPath, ScorePage[] scorePages)
         {
             ScorePages = scorePages;

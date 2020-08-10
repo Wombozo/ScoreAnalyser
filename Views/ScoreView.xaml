@@ -11,7 +11,7 @@
         <viewModels:ScoreViewModel />
     </Design.DataContext>
 
-    <TabControl Items="{Binding Path=ScorePagesVMTabItem}" Name="TabControl">
+    <TabControl Items="{Binding Path=ScorePagesVM}" Name="TabControl">
         <TabControl.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding Path=PageNumber}" />

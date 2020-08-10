@@ -30,7 +30,6 @@ namespace ScoreAnalyser.Views
         private Canvas Canvas { get; set; }
         private ScorePageViewModel ScorePageViewModel { get; set; }
         private DragAndDropContext DragAndDropContext { get; set; }
-        private ScoreBoard ScoreBoard { get; set; }
 
         private void AddImageOnScore(MusicItem musicItem, double x, double y)
         {
@@ -40,6 +39,7 @@ namespace ScoreAnalyser.Views
             Canvas.SetLeft(musicItemView, x);
             Canvas.SetTop(musicItemView, y);
             ScorePageViewModel.MusicItemViewModels.Add(newMusicItemViewModel);
+            ScorePageViewModel.ScorePage.AddMusicItem(musicItem);
             Canvas.Children.Add(musicItemView);
         }
 
@@ -47,6 +47,7 @@ namespace ScoreAnalyser.Views
         {
             var musicItemViewModel = ScorePageViewModel.MusicItemViewModels.First(i => i.MusicItem.Equals(DragAndDropContext.MusicItem));
             ScorePageViewModel.MusicItemViewModels.Remove(musicItemViewModel);
+            ScorePageViewModel.ScorePage.RemoveMusicItem(musicItemViewModel.MusicItem);
             Canvas.Children.Remove(musicItemView as MusicItemView);
         }
 

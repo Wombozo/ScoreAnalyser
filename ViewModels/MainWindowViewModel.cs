@@ -34,7 +34,6 @@ namespace ScoreAnalyser.ViewModels
 
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
-        public bool ProgressBarVisible { get; set; }
 
         public async Task ImportPDF(Window parentWindow)
         {
@@ -50,9 +49,7 @@ namespace ScoreAnalyser.ViewModels
             var filter = new FileDialogFilter {Extensions = new List<string> {"pdf"}, Name = "PDF files"};
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await openFileDialog.ShowAsync(parentWindow);
-            ProgressBarVisible = true;
             Score.SetNewScore(result[0]);
-            ProgressBarVisible = false;
         }
 
         public void Save()
@@ -69,7 +66,6 @@ namespace ScoreAnalyser.ViewModels
 
     public class DragAndDropContext
     {
-        // public string SelectedImageSource { get; set; }
         public MusicItem MusicItem { get; set; }
         public bool IsDragging = false;
         public bool Authorized = false;
