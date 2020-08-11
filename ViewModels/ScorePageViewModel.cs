@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
@@ -40,5 +39,6 @@ namespace ScoreAnalyser.ViewModels
         }
         public ScorePage ScorePage { get; set; }
         public Bitmap BackgroundBitmap { get; set; }
+        public object Canvas { get; set; }
     }
 }

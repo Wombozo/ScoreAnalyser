@@ -19,7 +19,7 @@
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas Name="Canvas" Width="5000" Height="5000" >
-                            <Canvas.Background>
+                            <Canvas.Background >
                                 <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
                             </Canvas.Background>
                         </Canvas>

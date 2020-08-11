@@ -1,5 +1,4 @@
-﻿using Avalonia.Styling;
-using ReactiveUI;
+﻿using ReactiveUI;
 using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
