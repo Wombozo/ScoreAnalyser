@@ -29,35 +29,33 @@ namespace ScoreAnalyser.Views
             border.PointerPressed += OnClick;
             border.PointerReleased += OnRelease;
         }
-
-        private void OnClick(object sender, PointerPressedEventArgs args)
-        {
-            var vm = (MusicItemViewModel) DataContext;
-            if (!(sender is Border border) || !vm.DragAndDropContext.Authorized)
-                return;
-            vm.DragAndDropContext.IsDragging = true;
-            vm.DragAndDropContext.MusicItem = vm.MusicItem;
-            vm.DragAndDropContext.NotifyPressed(new PointerPressedContextEventArgs(args, border.Parent.Parent, this));
-        }
-
-        private void OnRelease(object sender, PointerReleasedEventArgs args)
-        {
-            var vm = (MusicItemViewModel) DataContext;
-            vm.DragAndDropContext.NotifyReleased(args);
-        }
+    
+    private void OnClick(object sender, PointerPressedEventArgs args)
+    {
+        var vm = (MusicItemViewModel) DataContext;
+        if (!(sender is Border) || !vm.DragAndDropContext.Authorized)
+            return;
+        vm.DragAndDropContext.IsDragging = true;
+        vm.DragAndDropContext.MusicItem = vm.MusicItem;
+        vm.DragAndDropContext.NotifyPressed(new PointerPressedContextEventArgs(args, vm.IsInToolbox));
+    }
+    
+    private void OnRelease(object sender, PointerReleasedEventArgs args)
+    {
+        var vm = (MusicItemViewModel) DataContext;
+        vm.DragAndDropContext.NotifyReleased(args);
+    }
     }
 
     public class PointerPressedContextEventArgs : EventArgs
     {
         public PointerPressedEventArgs PointerPressedEventArgs { get; }
-        public IControl SenderGrandParent { get; }
-        public IControl Sender { get; }
-
-        public PointerPressedContextEventArgs(PointerPressedEventArgs pointerPressedEventArgs, IControl senderGrandParent, IControl sender)
+        public bool IsInToolbox { get; }
+    
+        public PointerPressedContextEventArgs(PointerPressedEventArgs pointerPressedEventArgs, bool isInToolbox)
         {
             PointerPressedEventArgs = pointerPressedEventArgs;
-            SenderGrandParent = senderGrandParent;
-            Sender = sender;
+            IsInToolbox = isInToolbox;
         }
     }
 }

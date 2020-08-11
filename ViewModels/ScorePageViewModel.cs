@@ -11,7 +11,6 @@ namespace ScoreAnalyser.ViewModels
         public ScorePageViewModel()
         {
             MusicItemViewModels = new ObservableCollection<MusicItemViewModel>();
-            // MusicItemViewModels = new List<MusicItemViewModel>();
         }
         public int PageNumber { get; set; }
         public float Scaling
@@ -26,9 +25,19 @@ namespace ScoreAnalyser.ViewModels
 
         private const float STEP_SCALING = .5f;
         public ScoreViewModel ScoreViewModel { get; set; }
-        // public List<MusicItemViewModel> MusicItemViewModels { get; }
         public ObservableCollection<MusicItemViewModel> MusicItemViewModels { get; }
 
+        public void AddMusicItem(MusicItemViewModel musicItemViewModel)
+        {
+            ScorePage.AddMusicItem(musicItemViewModel.MusicItem);
+            MusicItemViewModels.Add(musicItemViewModel);
+        }
+
+        public void RemoveMusicItem(MusicItemViewModel musicItemViewModel)
+        {
+            ScorePage.RemoveMusicItem(musicItemViewModel.MusicItem);
+            MusicItemViewModels.Remove(musicItemViewModel);
+        }
         public ScorePage ScorePage { get; set; }
         public Bitmap BackgroundBitmap { get; set; }
     }

@@ -21,9 +21,11 @@ namespace ScoreAnalyser.ViewModels
         public MusicItemViewModel(MusicItem musicItem, DragAndDropContext dragAndDropContext) : this(musicItem)
         {
             DragAndDropContext = dragAndDropContext;
+            IsInToolbox = false;
         }
 
         public MusicItem MusicItem { get; }
         public DragAndDropContext DragAndDropContext { get; }
+        public readonly bool IsInToolbox = true;
     }
 }
