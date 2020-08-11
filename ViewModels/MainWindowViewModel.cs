@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using ReactiveUI;
 
 namespace ScoreAnalyser.ViewModels
 {
@@ -79,6 +80,16 @@ namespace ScoreAnalyser.ViewModels
             var result = await saveFileDialog.ShowAsync(parentWindow);
             Score.Serialize(result);
         }
+
+        public void ShowHideItems() => ItemsVisible = !ItemsVisible;
+
+        public bool ItemsVisible
+        {
+            get => _itemsVisible;
+            set => this.RaiseAndSetIfChanged(ref _itemsVisible, value);
+        }
+
+        private bool _itemsVisible = true;
     }
 
     public class DragAndDropContext

@@ -32,6 +32,11 @@ namespace ScoreAnalyser.Views
                     break;
             }
         }
+
+        private void Test(object? sender, EventArgs args)
+        {
+            Console.WriteLine("Test");
+        }
     }
 
 }

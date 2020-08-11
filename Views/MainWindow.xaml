@@ -26,8 +26,13 @@
                 <MenuItem Header="Save as" Command="{Binding Path=Save}"
                           CommandParameter="{Binding ElementName=MainWindow}" />
             </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="Show/Hide Items Box" Command="{Binding Path=ShowHideItems}"/>
+                <Separator />
+                <MenuItem Header="Draw..." />
+            </MenuItem>
         </Menu>
-        <TabControl>
+        <TabControl IsVisible="{Binding Path=ItemsVisible}">
             <TabItem Header="Harmonies" VerticalContentAlignment="Center">
                 <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
                     <Grid.ColumnDefinitions>
