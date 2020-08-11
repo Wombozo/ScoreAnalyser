@@ -15,10 +15,10 @@
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
             </LayoutTransformControl.LayoutTransform>
-            <ItemsControl Items="{Binding Path=MusicItemViewModels}">
+            <ItemsControl Name="ItemsControl" Items="{Binding Path=MusicItemViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Name="Canvas" Width="5000" Height="5000" >
+                        <Canvas Name="Canvas" Width="5000" Height="5000" DataContextChanged="OnChangeDataContext">
                             <Canvas.Background >
                                 <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
                             </Canvas.Background>
