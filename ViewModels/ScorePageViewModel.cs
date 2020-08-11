@@ -29,13 +29,13 @@ namespace ScoreAnalyser.ViewModels
 
         public void AddMusicItem(MusicItemViewModel musicItemViewModel)
         {
-            ScorePage.AddMusicItem(musicItemViewModel.MusicItem);
+            ScorePage.AddMusicItem(musicItemViewModel.GetMusicItem());
             MusicItemViewModels.Add(musicItemViewModel);
         }
 
         public void RemoveMusicItem(MusicItemViewModel musicItemViewModel)
         {
-            ScorePage.RemoveMusicItem(musicItemViewModel.MusicItem);
+            ScorePage.RemoveMusicItem(musicItemViewModel.GetMusicItem());
             MusicItemViewModels.Remove(musicItemViewModel);
         }
         public ScorePage ScorePage { get; set; }

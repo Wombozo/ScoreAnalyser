@@ -41,13 +41,13 @@ namespace ScoreAnalyser.Views
                     DragAndDropContext.IsDragging = true;
                     var musicItem =
                         ScoreViewModel.SelectedPageViewModel.MusicItemViewModels.First(i =>
-                            i.MusicItem.Equals(DragAndDropContext.MusicItem));
-                    DragAndDropContext.MusicItem = musicItem.MusicItem;
+                            i.Equals(DragAndDropContext.MusicItemViewModel));
+                    DragAndDropContext.MusicItemViewModel = musicItem;
                     break;
                 case InputModifiers.RightMouseButton:
                     DragAndDropContext.IsDragging = false;
                     var musicItemViewModel =
-                        ScoreViewModel.SelectedPageViewModel.MusicItemViewModels.First(i => i.MusicItem.Equals(DragAndDropContext.MusicItem));
+                        ScoreViewModel.SelectedPageViewModel.MusicItemViewModels.First(i => i.Equals(DragAndDropContext.MusicItemViewModel));
                     ScoreViewModel.SelectedPageViewModel.RemoveMusicItem(musicItemViewModel);
                     break;
             }
@@ -59,8 +59,7 @@ namespace ScoreAnalyser.Views
                 e.InitialPressMouseButton != MouseButton.Left ||
                 DragAndDropContext.IsDragging == false)
                 return;
-            var newMusicItemViewModel = new MusicItemViewModel(DragAndDropContext.MusicItem, DragAndDropContext);
-            // newMusicItemViewModel.MusicItem.Position = (x, y);
+            var newMusicItemViewModel = new MusicItemViewModel(DragAndDropContext, 1000, 1000);
             ScoreViewModel.SelectedPageViewModel.AddMusicItem(newMusicItemViewModel);
             DragAndDropContext.IsDragging = false;
         }

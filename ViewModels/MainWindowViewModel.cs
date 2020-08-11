@@ -66,7 +66,7 @@ namespace ScoreAnalyser.ViewModels
 
     public class DragAndDropContext
     {
-        public MusicItem MusicItem { get; set; }
+        public MusicItemViewModel MusicItemViewModel { get; set; }
         public bool IsDragging = false;
         public bool Authorized = false;
         public event EventHandler MouseReleased;

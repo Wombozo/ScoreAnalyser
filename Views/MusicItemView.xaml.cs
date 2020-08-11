@@ -36,7 +36,7 @@ namespace ScoreAnalyser.Views
         if (!(sender is Border) || !vm.DragAndDropContext.Authorized)
             return;
         vm.DragAndDropContext.IsDragging = true;
-        vm.DragAndDropContext.MusicItem = vm.MusicItem;
+        vm.DragAndDropContext.MusicItemViewModel = vm;
         vm.DragAndDropContext.NotifyPressed(new PointerPressedContextEventArgs(args, vm.IsInToolbox));
     }
     

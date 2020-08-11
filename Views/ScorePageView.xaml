@@ -18,13 +18,19 @@
             <ItemsControl Items="{Binding Path=MusicItemViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Name="Canvas" Width="5000" Height="5000">
+                        <Canvas Name="Canvas" Width="5000" Height="5000" >
                             <Canvas.Background>
                                 <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
                             </Canvas.Background>
                         </Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.Styles>
+                    <Style Selector="ContentPresenter">
+                        <Setter Property="Canvas.Top" Value="{Binding Path=Y}" />
+                        <Setter Property="Canvas.Left" Value="{Binding Path=X}" />
+                    </Style>
+                </ItemsControl.Styles>
             </ItemsControl>
         </LayoutTransformControl>
     </ScrollViewer>
