@@ -26,6 +26,11 @@ namespace ScoreAnalyser.ViewModels
 
         public void SetNewScore(string scoreFileName)
         {
+            if (ScoreBoard != null)
+            {
+                for(var i = ScorePagesVM.Count - 1; i >= 0; i--)
+                    ScorePagesVM.RemoveAt(i);
+            }
             var scorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
             var scorePages = new List<ScorePage>();
             var numberPages = scorePagesBitmap.Length;
@@ -45,6 +50,11 @@ namespace ScoreAnalyser.ViewModels
 
         private void RestoreModel()
         {
+            if (ScorePagesVM.Count != 0)
+            {
+                for(var i = ScorePagesVM.Count - 1; i >= 0; i--)
+                    ScorePagesVM.RemoveAt(i);
+            }
             var scorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(ScoreBoard.PdfPath).ToArray();
             var numberPages = scorePagesBitmap.Length;
             for (var i = 0; i < numberPages; i++)
