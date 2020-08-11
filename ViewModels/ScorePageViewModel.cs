@@ -34,7 +34,7 @@ namespace ScoreAnalyser.ViewModels
 
         private const float STEP_SCALING = .5f;
         public ScoreViewModel ScoreViewModel { get; set; }
-        public ObservableCollection<MusicItemViewModel> MusicItemViewModels { get; }
+        public ObservableCollection<MusicItemViewModel> MusicItemViewModels { get; set; }
 
         public void AddMusicItem(MusicItemViewModel musicItemViewModel)
         {

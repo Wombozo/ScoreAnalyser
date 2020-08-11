@@ -10,15 +10,15 @@ namespace ScoreAnalyser.Models
         public ScorePage()
         {
         }
-        public double Scaling { get; set; }
-        public List<MusicItem> MusicItems { get; }
+        public float Scaling { get; set; }
+        public List<MusicItem> MusicItems { get; set; }
         public int PageNumber { get; set; }
 
         public ScorePage(int pageNumber) : this(1, new MusicItem[0], pageNumber)
         {
         }
 
-        public ScorePage(double scaling, IEnumerable<MusicItem> musicItems, int pageNumber)
+        public ScorePage(float scaling, IEnumerable<MusicItem> musicItems, int pageNumber)
         {
             Scaling = scaling;
             MusicItems = musicItems.ToList();

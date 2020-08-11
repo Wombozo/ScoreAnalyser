@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xml.Serialization;
 using ScoreAnalyser.Models;
 
@@ -20,7 +18,6 @@ namespace ScoreAnalyser.ViewModels
         public ScoreBoard ScoreBoard { get; set; }
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
         public ScorePageViewModel SelectedPageViewModel { get; set; }
-        public int NumberPages { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
 
         public void IncreaseScaling() => SelectedPageViewModel?.IncreaseScaling();
@@ -31,8 +28,8 @@ namespace ScoreAnalyser.ViewModels
         {
             var scorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(scoreFileName).ToArray();
             var scorePages = new List<ScorePage>();
-            NumberPages = scorePagesBitmap.Length;
-            for (var i = 0; i < NumberPages; i++)
+            var numberPages = scorePagesBitmap.Length;
+            for (var i = 0; i < numberPages; i++)
             {
                 scorePages.Add(new ScorePage(i));
                 ScorePagesVM.Add(new ScorePageViewModel
@@ -46,11 +43,38 @@ namespace ScoreAnalyser.ViewModels
             DragAndDropContext.Authorized = true;
         }
 
+        private void RestoreModel()
+        {
+            var scorePagesBitmap = PDFToImageConverter.ConvertPDFToMultipleImages(ScoreBoard.PdfPath).ToArray();
+            var numberPages = scorePagesBitmap.Length;
+            for (var i = 0; i < numberPages; i++)
+            {
+                var musicItems = ScoreBoard.ScorePages[i].MusicItems;
+                var musicItemsViewModel = new List<MusicItemViewModel>();
+                for (var j = 0; j < musicItems.Count; j++)
+                {
+                    musicItemsViewModel.Add(new MusicItemViewModel 
+                        {
+                            ItemPath = musicItems[j].Path, X = musicItems[j].Position.x, Y = musicItems[j].Position.y,
+                            DragAndDropContext = DragAndDropContext
+                        });
+                }
+
+                ScorePagesVM.Add(new ScorePageViewModel
+                {
+                    PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i], ScorePage = ScoreBoard.ScorePages[i],
+                    ScoreViewModel = this, Scaling = ScoreBoard.ScorePages[i].Scaling,
+                    MusicItemViewModels = new ObservableCollection<MusicItemViewModel>(musicItemsViewModel)
+                });
+            }
+            DragAndDropContext.Authorized = true;
+        }
         public void ImportScore(string path)
         {
             var ser = new XmlSerializer(typeof(ScoreBoard));
             using var sr = new StreamReader(path);
             ScoreBoard = ser.Deserialize(sr) as ScoreBoard;
+            RestoreModel();
         }
         public void Serialize(string path)
         {

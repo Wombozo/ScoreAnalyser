@@ -24,7 +24,7 @@ namespace ScoreAnalyser.ViewModels
             IsInToolbox = false;
         }
         private MusicItem MusicItem { get; }
-        public DragAndDropContext DragAndDropContext { get; }
+        public DragAndDropContext DragAndDropContext { get; set; }
         public readonly bool IsInToolbox = true;
         public string ItemPath { get; set; }
         public double X { get => _x; set => this.RaiseAndSetIfChanged(ref _x, value); }
