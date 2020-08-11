@@ -17,6 +17,9 @@
     <DockPanel>
         <Menu Name="MainMenu" DockPanel.Dock="Top">
             <MenuItem Header="File">
+                <MenuItem Header="Open project" Command="{Binding Path=OpenProject}"
+                          CommandParameter="{Binding ElementName=MainWindow}" />
+                <Separator />
                 <MenuItem Header="Import PDF Score" Command="{Binding Path=ImportPDF}"
                           CommandParameter="{Binding ElementName=MainWindow}" />
                 <Separator />

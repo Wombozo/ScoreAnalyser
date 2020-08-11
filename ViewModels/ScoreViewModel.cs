@@ -46,6 +46,12 @@ namespace ScoreAnalyser.ViewModels
             DragAndDropContext.Authorized = true;
         }
 
+        public void ImportScore(string path)
+        {
+            var ser = new XmlSerializer(typeof(ScoreBoard));
+            using var sr = new StreamReader(path);
+            ScoreBoard = ser.Deserialize(sr) as ScoreBoard;
+        }
         public void Serialize(string path)
         {
             var xsSubmit = new XmlSerializer(typeof(ScoreBoard));

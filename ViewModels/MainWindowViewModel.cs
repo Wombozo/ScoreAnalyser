@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 using Avalonia.Controls;
-using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
 {
@@ -35,6 +31,22 @@ namespace ScoreAnalyser.ViewModels
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
+        public async Task OpenProject(Window parentWindow)
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
+                            Environment.OSVersion.Platform == PlatformID.MacOSX
+                    ? Environment.GetEnvironmentVariable("HOME")
+                    : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
+                Title = "Select PDF score",
+                AllowMultiple = false
+            };
+            var filter = new FileDialogFilter {Extensions = new List<string> {"xml"}, Name = "XML files"};
+            openFileDialog.Filters = new List<FileDialogFilter> {filter};
+            var result = await openFileDialog.ShowAsync(parentWindow);
+            Score.ImportScore(result[0]);
+        }
         public async Task ImportPDF(Window parentWindow)
         {
             var openFileDialog = new OpenFileDialog
@@ -62,7 +74,7 @@ namespace ScoreAnalyser.ViewModels
                     : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
                 Title = "Save project as ...",
             };
-            var filter = new FileDialogFilter {Extensions = new List<string> {"xml"}, Name = "xml file"};
+            var filter = new FileDialogFilter {Extensions = new List<string> {"xml"}, Name = "XML files"};
             saveFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await saveFileDialog.ShowAsync(parentWindow);
             Score.Serialize(result);
