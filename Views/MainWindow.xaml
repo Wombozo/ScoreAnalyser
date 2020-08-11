@@ -27,9 +27,11 @@
                           CommandParameter="{Binding ElementName=MainWindow}" />
             </MenuItem>
             <MenuItem Header="Tools">
-                <MenuItem Header="Show/Hide Items Box" Command="{Binding Path=ShowHideItems}"/>
+                <MenuItem Header="Show/Hide Items Box" Command="{Binding Path=ShowHideItems}" />
                 <Separator />
-                <MenuItem Header="Draw..." />
+                <MenuItem Header="Draw...">
+                    <MenuItem Header="Line" />
+                </MenuItem>
             </MenuItem>
         </Menu>
         <TabControl IsVisible="{Binding Path=ItemsVisible}">
