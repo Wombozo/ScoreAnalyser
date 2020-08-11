@@ -52,15 +52,20 @@ namespace ScoreAnalyser.ViewModels
             Score.SetNewScore(result[0]);
         }
 
-        public void Save()
+        public async Task Save(Window parentWindow)
         {
-            // if (Score.ScorePages == null) return;
-            var xsSubmit = new XmlSerializer(typeof(ScoreViewModel));
-        
-            var sww = new StringWriter();
-            var writer = new XmlTextWriter(sww) { Formatting = Formatting.Indented };
-            xsSubmit.Serialize(writer, Score);
-            var xml = sww.ToString();
+            var saveFileDialog = new SaveFileDialog()
+            {
+                Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
+                            Environment.OSVersion.Platform == PlatformID.MacOSX
+                    ? Environment.GetEnvironmentVariable("HOME")
+                    : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
+                Title = "Save project as ...",
+            };
+            var filter = new FileDialogFilter {Extensions = new List<string> {"xml"}, Name = "xml file"};
+            saveFileDialog.Filters = new List<FileDialogFilter> {filter};
+            var result = await saveFileDialog.ShowAsync(parentWindow);
+            Score.Serialize(result);
         }
     }
 

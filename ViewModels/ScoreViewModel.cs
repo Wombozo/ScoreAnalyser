@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
@@ -32,11 +36,22 @@ namespace ScoreAnalyser.ViewModels
             {
                 scorePages.Add(new ScorePage(i));
                 ScorePagesVM.Add(new ScorePageViewModel
-                    {PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i], ScorePage = scorePages[i], ScoreViewModel = this});
+                {
+                    PageNumber = i + 1, BackgroundBitmap = scorePagesBitmap[i], ScorePage = scorePages[i],
+                    ScoreViewModel = this
+                });
             }
 
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
             DragAndDropContext.Authorized = true;
+        }
+
+        public void Serialize(string path)
+        {
+            var xsSubmit = new XmlSerializer(typeof(ScoreBoard));
+            var sww = new StringWriter();
+            var file = File.Create(path); 
+            xsSubmit.Serialize(file, ScoreBoard);
         }
     }
 }

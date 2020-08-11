@@ -1,13 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ScoreAnalyser.Models
 {
+    [Serializable]
     public class ScorePage
     {
-        public double Scaling { get; }
+        public ScorePage()
+        {
+        }
+        public double Scaling { get; set; }
         public List<MusicItem> MusicItems { get; }
-        public int PageNumber { get; }
+        public int PageNumber { get; set; }
 
         public ScorePage(int pageNumber) : this(1, new MusicItem[0], pageNumber)
         {

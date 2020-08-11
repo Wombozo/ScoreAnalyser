@@ -1,16 +1,20 @@
-using System.Collections.Generic;
-using ScoreAnalyser.ViewModels;
+using System;
 
 namespace ScoreAnalyser.Models
 {
-    public class ScoreBoard : ModelBase
+    [Serializable]
+    public class ScoreBoard
     {
-        public ScorePage[] ScorePages { get; }
-        public string PdfPath { get; }
+        public ScorePage[] ScorePages { get; set; }
+        public string PdfPath { get; set; }
         public ScoreBoard(string pdfPath, ScorePage[] scorePages)
         {
             ScorePages = scorePages;
             PdfPath = pdfPath;
+        }
+
+        public ScoreBoard()
+        {
         }
     }
 }

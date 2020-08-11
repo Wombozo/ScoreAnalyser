@@ -1,5 +1,8 @@
+using System;
+
 namespace ScoreAnalyser.Models
 {
+    [Serializable]
     public class MusicItem
     {
         public string Path { get; set; }
@@ -11,6 +14,10 @@ namespace ScoreAnalyser.Models
             Position = (x,y);
         }
 
-        public MusicItem Copy(double x, double y) => new MusicItem(Path, x, y); 
+        public MusicItem Copy(double x, double y) => new MusicItem(Path, x, y);
+
+        public MusicItem()
+        {
+        }
     }
 }
