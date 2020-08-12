@@ -60,15 +60,8 @@ namespace ScoreAnalyser.ViewModels
             for (var i = 0; i < numberPages; i++)
             {
                 var musicItems = ScoreBoard.ScorePages[i].MusicItems;
-                var musicItemsViewModel = new List<MusicItemViewModel>();
-                for (var j = 0; j < musicItems.Count; j++)
-                {
-                    musicItemsViewModel.Add(new MusicItemViewModel 
-                        {
-                            ItemPath = musicItems[j].Path, X = musicItems[j].Position.x, Y = musicItems[j].Position.y,
-                            DragAndDropContext = DragAndDropContext
-                        });
-                }
+                var musicItemsViewModel =
+                    musicItems.Select(t => new MusicItemViewModel(t.Path, DragAndDropContext, t.Position.x, t.Position.y)).ToList();
 
                 ScorePagesVM.Add(new ScorePageViewModel
                 {

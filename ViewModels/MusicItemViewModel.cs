@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using System.Runtime.CompilerServices;
+using ReactiveUI;
 using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
@@ -23,6 +24,14 @@ namespace ScoreAnalyser.ViewModels
             MusicItem = new MusicItem(ItemPath, x, y);
             IsInToolbox = false;
         }
+
+        public MusicItemViewModel(string itemPath, DragAndDropContext dragAndDropContext, double x, double y)
+            : this(itemPath, dragAndDropContext)
+        {
+            (X, Y) = (x, y);
+            IsInToolbox = false;
+        }
+
         private MusicItem MusicItem { get; }
         public DragAndDropContext DragAndDropContext { get; set; }
         public readonly bool IsInToolbox = true;

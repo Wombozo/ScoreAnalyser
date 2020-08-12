@@ -1,5 +1,4 @@
 #nullable enable
-using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -31,11 +30,6 @@ namespace ScoreAnalyser.Views
                     ((MainWindowViewModel)DataContext).DecreaseScaling();
                     break;
             }
-        }
-
-        private void Test(object? sender, EventArgs args)
-        {
-            Console.WriteLine("Test");
         }
     }
 
