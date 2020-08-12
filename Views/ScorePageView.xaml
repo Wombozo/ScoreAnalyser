@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:ScoreAnalyser.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ScoreAnalyser.Views.ScorePageView">
+             x:Class="ScoreAnalyser.Views.ScorePageView" DataContextChanged="OnChangeDataContext">
     <Design.DataContext>
         <viewModels:ScorePageViewModel />
     </Design.DataContext>
@@ -18,7 +18,7 @@
             <ItemsControl Name="ItemsControl" Items="{Binding Path=MusicItemViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas Name="Canvas" Width="5000" Height="5000" DataContextChanged="OnChangeDataContext">
+                        <Canvas Name="Canvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" DataContextChanged="OnChangeDataContext" >
                             <Canvas.Background >
                                 <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
                             </Canvas.Background>
