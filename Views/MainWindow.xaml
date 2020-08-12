@@ -43,7 +43,7 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <TextBlock Text="Coucou" TextAlignment="Right" Grid.Column="1" Grid.Row="0" />
+            <TextBlock Text="{Binding Path=InfoText}" TextAlignment="Right" Grid.Column="1" Grid.Row="0" />
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <TabControl IsVisible="{Binding Path=ItemsVisible}">
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">

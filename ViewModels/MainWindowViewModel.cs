@@ -81,6 +81,13 @@ namespace ScoreAnalyser.ViewModels
             Score.Serialize(result);
         }
 
+        public string InfoText
+        {
+            get => _infoText;
+            set => this.RaiseAndSetIfChanged(ref _infoText, value);
+        }
+        
+        private string _infoText;
         public void ShowHideItems() => ItemsVisible = !ItemsVisible;
 
         public bool ItemsVisible
