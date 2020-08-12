@@ -15,7 +15,7 @@
     </Design.DataContext>
 
     <DockPanel>
-        <Grid ShowGridLines="False" DockPanel.Dock="Left" >
+        <Grid ShowGridLines="False" DockPanel.Dock="Left">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" MaxWidth="200" />
                 <ColumnDefinition Width="4*" />
@@ -45,7 +45,7 @@
                 </MenuItem>
             </Menu>
             <TextBlock Text="{Binding Path=InfoText}" TextAlignment="Center" Grid.Column="2" Grid.Row="0" />
-            <DockPanel Grid.Column="0" Grid.Row="1" >
+            <DockPanel Grid.Column="0" Grid.Row="1">
                 <TabControl IsVisible="{Binding Path=ItemsVisible}">
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">
                         <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
@@ -64,46 +64,52 @@
                             </Grid.RowDefinitions>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Tonics :"
                                        Grid.Row="0" />
-                            <!-- <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Row="1"> -->
-                            <views:TonicToolboxView Grid.Row="1">
-                                <views:TonicToolboxView.DataContext>
-                                    <Binding Path="TonicToolbox" />
-                                </views:TonicToolboxView.DataContext>
-                            </views:TonicToolboxView>
-                            <!-- </ScrollViewer> -->
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                                <views:TonicToolboxView>
+                                    <views:TonicToolboxView.DataContext>
+                                        <Binding Path="TonicToolbox" />
+                                    </views:TonicToolboxView.DataContext>
+                                </views:TonicToolboxView>
+                            </ScrollViewer>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominants :"
                                        Grid.Row="2" />
-                            <views:DominantToolboxView Grid.Row="3">
-                                <views:DominantToolboxView.DataContext>
-                                    <Binding Path="DominantToolbox" />
-                                </views:DominantToolboxView.DataContext>
-                            </views:DominantToolboxView>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3" >
+                                <views:DominantToolboxView>
+                                    <views:DominantToolboxView.DataContext>
+                                        <Binding Path="DominantToolbox" />
+                                    </views:DominantToolboxView.DataContext>
+                                </views:DominantToolboxView>
+                            </ScrollViewer>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Predominants :"
                                        Grid.Row="4" />
-                            <views:PredominantToolboxView Grid.Row="5">
-                                <views:PredominantToolboxView.DataContext>
-                                    <Binding Path="PredominantToolbox" />
-                                </views:PredominantToolboxView.DataContext>
-                            </views:PredominantToolboxView>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="5">
+                                <views:PredominantToolboxView>
+                                    <views:PredominantToolboxView.DataContext>
+                                        <Binding Path="PredominantToolbox" />
+                                    </views:PredominantToolboxView.DataContext>
+                                </views:PredominantToolboxView>
+                            </ScrollViewer>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Miscs :"
                                        Grid.Row="6" />
-                            <views:MiscToolboxView Grid.Row="7">
-                                <views:MiscToolboxView.DataContext>
-                                    <Binding Path="MiscToolbox" />
-                                </views:MiscToolboxView.DataContext>
-                            </views:MiscToolboxView>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="7">
+                                <views:MiscToolboxView>
+                                    <views:MiscToolboxView.DataContext>
+                                        <Binding Path="MiscToolbox" />
+                                    </views:MiscToolboxView.DataContext>
+                                </views:MiscToolboxView>
+                            </ScrollViewer>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Keys" VerticalContentAlignment="Center">
                         <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30" />
-                                <RowDefinition Height="400" />
+                                <RowDefinition Height="*" />
                                 <RowDefinition Height="30" />
-                                <RowDefinition />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Major :"
                                        Grid.Row="0" />
@@ -124,7 +130,7 @@
                 </TabControl>
             </DockPanel>
             <DockPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-                <views:ScoreView >
+                <views:ScoreView>
                     <views:ScoreView.DataContext>
                         <Binding Path="Score" />
                     </views:ScoreView.DataContext>

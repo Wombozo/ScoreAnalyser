@@ -13,7 +13,7 @@
     <ItemsControl Items="{Binding Path=Dominants}" Background="LightCoral">
       <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
-          <WrapPanel />
+          <WrapPanel MaxWidth="200"/>
         </ItemsPanelTemplate>
       </ItemsControl.ItemsPanel>
     </ItemsControl>
