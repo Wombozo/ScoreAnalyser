@@ -15,14 +15,18 @@ namespace ScoreAnalyser.ViewModels
             ScorePagesVM = new ObservableCollection<ScorePageViewModel>();
             DragAndDropContext = dragAndDropContext;
         }
-
         public ScoreBoard ScoreBoard { get; set; }
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
         public ScorePageViewModel SelectedPageViewModel { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
+        public bool SizeItemsVisible
+        {
+            get => _sizeItemsVisible;
+            set => this.RaiseAndSetIfChanged(ref _sizeItemsVisible, value);
+        }
+        private bool _sizeItemsVisible;
 
         private double _musicItemsSize = 50;
-
         public double MusicItemsSize
         {
             get => _musicItemsSize;
@@ -33,7 +37,6 @@ namespace ScoreAnalyser.ViewModels
                 this.RaiseAndSetIfChanged(ref _musicItemsSize, value);
             }
         }
-
         public void IncreaseScaling() => SelectedPageViewModel?.IncreaseScaling();
 
         public void DecreaseScaling() => SelectedPageViewModel?.DecreaseScaling();
@@ -85,6 +88,8 @@ namespace ScoreAnalyser.ViewModels
                 });
             }
             _musicItemsSize = ScoreBoard.ItemsSize;
+            MusicItemsSize = _musicItemsSize;
+
             DragAndDropContext.Authorized = true;
         }
         public void ImportScore(string path)

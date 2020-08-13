@@ -84,10 +84,7 @@ namespace ScoreAnalyser.ViewModels
             InfoText = "";
         }
 
-        public void OpenSizeMusicItemsWindow()
-        {
-            
-        }
+        public void ShowSizeItems() => Score.SizeItemsVisible = !Score.SizeItemsVisible;
         public string InfoText
         {
             get => _infoText;
@@ -105,7 +102,6 @@ namespace ScoreAnalyser.ViewModels
             get => _toolBoxWidth;
             set => this.RaiseAndSetIfChanged(ref _toolBoxWidth, value);
         }
-
         private float _toolBoxWidth = _maxToolboxWidth;
     }
 
