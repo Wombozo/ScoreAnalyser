@@ -98,7 +98,7 @@ namespace ScoreAnalyser.ViewModels
             set => this.RaiseAndSetIfChanged(ref _toolBoxWidth, value);
         }
 
-        private float _toolBoxWidth = 300f;
+        private float _toolBoxWidth = _maxToolboxWidth;
     }
 
     public class DragAndDropContext
