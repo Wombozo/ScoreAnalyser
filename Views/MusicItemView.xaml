@@ -15,7 +15,7 @@
     </Design.DataContext>
 
     <Border Name="Border">
-        <Image Width="50" Height="50" Margin="4">
+        <Image Width="50" Height="50" Margin="4" Name="Image" LayoutUpdated="WhenDataContextChanged">
             <Image.Source>
                 <!-- ReSharper disable once Xaml.InvalidType -->
                 <Binding Path="ItemPath" Converter="{StaticResource bitmapConverter}" />
