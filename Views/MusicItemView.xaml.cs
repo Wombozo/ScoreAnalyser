@@ -14,7 +14,6 @@ namespace ScoreAnalyser.Views
 {
     public class MusicItemView : UserControl
     {
-        private Image Image { get; set; }
         public MusicItemView()
         {
             InitializeComponent();
@@ -32,23 +31,6 @@ namespace ScoreAnalyser.Views
 
             border.PointerPressed += OnClick;
             border.PointerReleased += OnRelease;
-        }
-
-        private void WhenDataContextChanged(object e, EventArgs args)
-        {
-            Image = this.FindControl<Image>("Image");
-            Colorizing();
-        }
-        private void Colorizing()
-        {
-            if (Image.Source == null) return;
-            var bmpSource = Image.Source;
-            var streamPngFormat = new MemoryStream();
-            bmpSource.Save(streamPngFormat);
-            var pixels = streamPngFormat.ToArray();
-            streamPngFormat.Seek(0, SeekOrigin.Begin);
-            var bitmap = new Bitmap(streamPngFormat);
-            
         }
 
         private void OnClick(object sender, PointerPressedEventArgs args)
