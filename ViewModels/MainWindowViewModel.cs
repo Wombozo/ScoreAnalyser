@@ -86,17 +86,19 @@ namespace ScoreAnalyser.ViewModels
             get => _infoText;
             set => this.RaiseAndSetIfChanged(ref _infoText, value);
         }
-        
         private string _infoText;
-        public void ShowHideItems() => ItemsVisible = !ItemsVisible;
 
-        public bool ItemsVisible
+        private const float _maxToolboxWidth = 200;
+        private const float _minToolboxWidth = .1f;
+        public void ShowHideItems() => ToolBoxWidth = ToolBoxWidth < 1 ? _maxToolboxWidth : _minToolboxWidth;
+
+        public float ToolBoxWidth
         {
-            get => _itemsVisible;
-            set => this.RaiseAndSetIfChanged(ref _itemsVisible, value);
+            get => _toolBoxWidth;
+            set => this.RaiseAndSetIfChanged(ref _toolBoxWidth, value);
         }
 
-        private bool _itemsVisible = true;
+        private float _toolBoxWidth = 300f;
     }
 
     public class DragAndDropContext
