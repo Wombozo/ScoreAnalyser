@@ -60,11 +60,11 @@ namespace ScoreAnalyser.Views
                 DragAndDropContext.IsDragging == false)
                 return;
             var position = e.GetPosition((Canvas)ScoreViewModel.SelectedPageViewModel.Canvas);
-            var x = position.X - 32;
-            var y = position.Y - 32;
+            var x = position.X - ScoreViewModel.MusicItemsSize/2;
+            var y = position.Y - ScoreViewModel.MusicItemsSize/2;
             if (!(x > 0) || !(y > 0)) return;
             var newMusicItemViewModel = new MusicItemViewModel(DragAndDropContext, x, y);
-            ScoreViewModel.SelectedPageViewModel.AddMusicItem(newMusicItemViewModel);
+            ScoreViewModel.SelectedPageViewModel.AddMusicItem(newMusicItemViewModel, ScoreViewModel.MusicItemsSize);
             DragAndDropContext.IsDragging = false;
         }
 

@@ -11,6 +11,7 @@
         <viewModels:ScoreViewModel />
     </Design.DataContext>
 
+    <DockPanel>
     <TabControl Items="{Binding Path=ScorePagesVM}" Name="TabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
         <TabControl.ItemTemplate>
             <DataTemplate>
@@ -24,4 +25,6 @@
             </DataTemplate>
         </TabControl.ContentTemplate>
     </TabControl>
+    <Slider Orientation="Horizontal" Value="{Binding Path=MusicItemsSize}" Minimum="10" Maximum="400" DockPanel.Dock="Bottom"/>
+    </DockPanel>
 </UserControl>

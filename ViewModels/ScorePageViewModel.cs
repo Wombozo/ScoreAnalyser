@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia.Media.Imaging;
 using ReactiveUI;
 using ScoreAnalyser.Models;
@@ -31,15 +32,21 @@ namespace ScoreAnalyser.ViewModels
             Scaling = Scaling - STEP_SCALING > 0 ? Scaling - STEP_SCALING : Scaling;
             ScorePage.Scaling = Scaling;
         }
+        public void UpdateItemsSize(double size)
+        {
+            MusicItemViewModels.ToList()
+                .ForEach(musicItemViewModel => musicItemViewModel.Size = size);
+        }
 
         private const float STEP_SCALING = .5f;
         public ScoreViewModel ScoreViewModel { get; set; }
         public ObservableCollection<MusicItemViewModel> MusicItemViewModels { get; set; }
 
-        public void AddMusicItem(MusicItemViewModel musicItemViewModel)
+        public void AddMusicItem(MusicItemViewModel musicItemViewModel, double size)
         {
             ScorePage.AddMusicItem(musicItemViewModel.GetMusicItem());
             MusicItemViewModels.Add(musicItemViewModel);
+            musicItemViewModel.Size = size;
         }
 
         public void RemoveMusicItem(MusicItemViewModel musicItemViewModel)

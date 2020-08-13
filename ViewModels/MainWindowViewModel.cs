@@ -28,7 +28,6 @@ namespace ScoreAnalyser.ViewModels
         public KeyMinorToolboxViewModel KeyMinorToolbox { get; }
         public ScoreViewModel Score { get; }
         public DragAndDropContext DragAndDropContext { get; }
-
         public void IncreaseScaling() => Score.IncreaseScaling();
         public void DecreaseScaling() => Score.DecreaseScaling();
 
@@ -50,6 +49,7 @@ namespace ScoreAnalyser.ViewModels
         }
         public async Task ImportPDF(Window parentWindow)
         {
+            InfoText = "Importing PDF";
             var openFileDialog = new OpenFileDialog
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -63,10 +63,12 @@ namespace ScoreAnalyser.ViewModels
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await openFileDialog.ShowAsync(parentWindow);
             Score.SetNewScore(result[0]);
+            InfoText = "";
         }
 
         public async Task Save(Window parentWindow)
         {
+            InfoText = "Saving project";
             var saveFileDialog = new SaveFileDialog()
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -79,13 +81,19 @@ namespace ScoreAnalyser.ViewModels
             saveFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await saveFileDialog.ShowAsync(parentWindow);
             Score.Serialize(result);
+            InfoText = "";
         }
 
+        public void OpenSizeMusicItemsWindow()
+        {
+            
+        }
         public string InfoText
         {
             get => _infoText;
             set => this.RaiseAndSetIfChanged(ref _infoText, value);
         }
+
         private string _infoText;
 
         private const float _maxToolboxWidth = 200;

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using ReactiveUI;
 using ScoreAnalyser.Models;
 
 namespace ScoreAnalyser.ViewModels
@@ -19,6 +20,19 @@ namespace ScoreAnalyser.ViewModels
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
         public ScorePageViewModel SelectedPageViewModel { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
+
+        private double _musicItemsSize = 50;
+
+        public double MusicItemsSize
+        {
+            get => _musicItemsSize;
+            set
+            {
+                ScoreBoard.ItemsSize = _musicItemsSize;
+                ScorePagesVM.ToList().ForEach(scorePageVM => scorePageVM.UpdateItemsSize(_musicItemsSize));
+                this.RaiseAndSetIfChanged(ref _musicItemsSize, value);
+            }
+        }
 
         public void IncreaseScaling() => SelectedPageViewModel?.IncreaseScaling();
 
@@ -44,7 +58,7 @@ namespace ScoreAnalyser.ViewModels
                 });
             }
 
-            ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray());
+            ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray(), _musicItemsSize);
             DragAndDropContext.Authorized = true;
         }
 
@@ -70,6 +84,7 @@ namespace ScoreAnalyser.ViewModels
                     MusicItemViewModels = new ObservableCollection<MusicItemViewModel>(musicItemsViewModel)
                 });
             }
+            _musicItemsSize = ScoreBoard.ItemsSize;
             DragAndDropContext.Authorized = true;
         }
         public void ImportScore(string path)

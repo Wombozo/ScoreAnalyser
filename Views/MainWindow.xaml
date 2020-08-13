@@ -39,14 +39,12 @@
                 <MenuItem Header="Tools">
                     <MenuItem Header="Show/Hide Items Box" Command="{Binding Path=ShowHideItems}" />
                     <Separator />
-                    <MenuItem Header="Draw...">
-                        <MenuItem Header="Line" />
-                    </MenuItem>
+                    <MenuItem Header="Resize Items" Command="{Binding Path=OpenSizeMusicItemsWindow}" />
                 </MenuItem>
             </Menu>
             <TextBlock Text="{Binding Path=InfoText}" TextAlignment="Center" Grid.Column="2" Grid.Row="0" />
             <DockPanel Grid.Column="0" Grid.Row="1">
-                <TabControl >
+                <TabControl>
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">
                         <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
                             <Grid.ColumnDefinitions>
@@ -73,7 +71,7 @@
                             </ScrollViewer>
                             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dominants :"
                                        Grid.Row="2" />
-                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3" >
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="3">
                                 <views:DominantToolboxView>
                                     <views:DominantToolboxView.DataContext>
                                         <Binding Path="DominantToolbox" />

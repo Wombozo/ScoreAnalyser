@@ -36,6 +36,8 @@ namespace ScoreAnalyser.ViewModels
         public DragAndDropContext DragAndDropContext { get; set; }
         public readonly bool IsInToolbox = true;
         public string ItemPath { get; set; }
+        private double _size = 50;
+        public double Size { get => _size; set => this.RaiseAndSetIfChanged(ref _size, value); }
         public double X { get => _x; set => this.RaiseAndSetIfChanged(ref _x, value); }
         public double Y { get => _y; set => this.RaiseAndSetIfChanged(ref _y, value); }
         private double _x;

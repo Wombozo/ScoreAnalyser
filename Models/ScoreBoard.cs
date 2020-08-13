@@ -7,10 +7,12 @@ namespace ScoreAnalyser.Models
     {
         public ScorePage[] ScorePages { get; set; }
         public string PdfPath { get; set; }
-        public ScoreBoard(string pdfPath, ScorePage[] scorePages)
+        public double ItemsSize {get; set; }
+        public ScoreBoard(string pdfPath, ScorePage[] scorePages, double itemsSize)
         {
             ScorePages = scorePages;
             PdfPath = pdfPath;
+            ItemsSize = itemsSize;
         }
 
         public ScoreBoard()
