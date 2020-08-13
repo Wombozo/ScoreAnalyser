@@ -4,34 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:ScoreAnalyser.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ScoreAnalyser.Views.ScorePageView" >
+             x:Class="ScoreAnalyser.Views.ScorePageView">
     <Design.DataContext>
         <viewModels:ScorePageViewModel />
     </Design.DataContext>
 
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <LayoutTransformControl Name="LayoutTransformControl">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Blue">
+        <LayoutTransformControl Name="LayoutTransformControl" VerticalAlignment="Center" HorizontalAlignment="Center">
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
             </LayoutTransformControl.LayoutTransform>
-            <ItemsControl Name="ItemsControl" Items="{Binding Path=MusicItemViewModels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas Name="Canvas" DataContextChanged="OnChangeDataContext" >
-                            <Canvas.Background >
-                                <ImageBrush Source="{Binding Path=BackgroundBitmap}" />
-                            </Canvas.Background>
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.Styles>
-                    <Style Selector="ContentPresenter">
-                        <Setter Property="Canvas.Top" Value="{Binding Path=Y}" />
-                        <Setter Property="Canvas.Left" Value="{Binding Path=X}" />
-                    </Style>
-                </ItemsControl.Styles>
-            </ItemsControl>
+            <Grid>
+                <Image Source="{Binding Path=BackgroundBitmap}" ZIndex="0" />
+                <ItemsControl Name="ItemsControl" Items="{Binding Path=MusicItemViewModels}" ZIndex="1">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Name="Canvas" DataContextChanged="OnChangeDataContext" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.Styles>
+                        <Style Selector="ContentPresenter">
+                            <Setter Property="Canvas.Top" Value="{Binding Path=Y}" />
+                            <Setter Property="Canvas.Left" Value="{Binding Path=X}" />
+                        </Style>
+                    </ItemsControl.Styles>
+                </ItemsControl>
+            </Grid>
         </LayoutTransformControl>
     </ScrollViewer>
 </UserControl>
