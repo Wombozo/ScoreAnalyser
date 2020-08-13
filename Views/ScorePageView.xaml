@@ -10,7 +10,7 @@
     </Design.DataContext>
 
 
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Blue">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
         <LayoutTransformControl Name="LayoutTransformControl" VerticalAlignment="Center" HorizontalAlignment="Center">
             <LayoutTransformControl.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding Path=Scaling}" ScaleY="{Binding Path=Scaling}" />
