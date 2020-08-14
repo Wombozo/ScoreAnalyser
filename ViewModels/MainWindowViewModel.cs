@@ -54,7 +54,7 @@ namespace ScoreAnalyser.ViewModels
                 Score.ImportScore(result[0]);
                 InfoText.Empty();
             }
-            catch(FileNotFoundException _){}
+            catch(FileNotFoundException){}
         }
         public async Task ImportPDF(Window parentWindow)
         {
