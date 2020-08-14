@@ -91,7 +91,7 @@ namespace ScoreAnalyser.ViewModels
             set => this.RaiseAndSetIfChanged(ref _infoText, value);
         }
 
-        private string _infoText;
+        private string _infoText = "Welcome to ScoreAnalyser. Import a project or start a new one !";
 
         private const float _maxToolboxWidth = 200;
         private const float _minToolboxWidth = .1f;

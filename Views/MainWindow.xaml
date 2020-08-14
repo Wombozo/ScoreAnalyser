@@ -16,17 +16,18 @@
 
     <Window.Styles>
         <Style Selector="TextBlock">
-            <Setter Property="FontFamily" Value="Junkyard"/>
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Courier New"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </Window.Styles>
 
     <DockPanel>
         <Grid ShowGridLines="False" DockPanel.Dock="Left">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MaxWidth="{Binding Path=ToolBoxWidth}" />
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" MaxWidth="{Binding Path=ToolBoxWidth}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
@@ -53,7 +54,7 @@
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <TabControl>
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">
-                        <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="Gray">
+                        <Grid ShowGridLines="False" DockPanel.Dock="Left" Background="CadetBlue">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
