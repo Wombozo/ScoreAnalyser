@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using System.Net;
-using System.Runtime.CompilerServices;
 using ReactiveUI;
 using ScoreAnalyser.Models;
 
@@ -30,7 +28,7 @@ namespace ScoreAnalyser.ViewModels
         public MusicItemViewModel(string itemPath, DragAndDropContext dragAndDropContext, double x, double y)
             : this(itemPath, dragAndDropContext)
         {
-            if (File.Exists(itemPath)) throw new FileNotFoundException("Music Item not found", itemPath);
+            if (!File.Exists(itemPath)) throw new FileNotFoundException("Music Item not found", itemPath);
             (X, Y) = (x, y);
             IsInToolbox = false;
         }

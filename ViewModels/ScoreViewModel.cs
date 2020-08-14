@@ -82,7 +82,7 @@ namespace ScoreAnalyser.ViewModels
 
             ScoreBoard = new ScoreBoard(scoreFileName, scorePages.ToArray(), _musicItemsSize);
             DragAndDropContext.Authorized = true;
-            InfoText.Empty();
+            InfoText.NewMessage("Score set !");
         }
 
         private void RestoreModel()
@@ -104,7 +104,7 @@ namespace ScoreAnalyser.ViewModels
 
                     var musicItemsViewModel =
                         musicItems.Select(t =>
-                            new MusicItemViewModel(t.Path, DragAndDropContext, t.Position.x, t.Position.y)).ToList();
+                            new MusicItemViewModel(Directory.GetCurrentDirectory() + "/Assets/png" + t.Path, DragAndDropContext, t.Position.x, t.Position.y)).ToList();
 
 
                     ScorePagesVM.Add(new ScorePageViewModel
@@ -119,7 +119,7 @@ namespace ScoreAnalyser.ViewModels
                 _musicItemsSize = ScoreBoard.ItemsSize;
                 MusicItemsSize = _musicItemsSize;
                 DragAndDropContext.Authorized = true;
-                InfoText.Empty();
+                InfoText.NewMessage("Project restored !");
             }
             catch (FileNotFoundException e)
             {
@@ -138,10 +138,12 @@ namespace ScoreAnalyser.ViewModels
 
         public void Serialize(string path)
         {
+            InfoText.NewMessage("Saving project to XML...");
             var xsSubmit = new XmlSerializer(typeof(ScoreBoard));
             var sww = new StringWriter();
             var file = File.Create(path);
             xsSubmit.Serialize(file, ScoreBoard);
+            InfoText.NewMessage("Project saved !");
         }
     }
 }
