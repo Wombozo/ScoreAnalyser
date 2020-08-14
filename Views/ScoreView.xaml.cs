@@ -65,6 +65,7 @@ namespace ScoreAnalyser.Views
             if (!(x > 0) || !(y > 0)) return;
             var newMusicItemViewModel = new MusicItemViewModel(DragAndDropContext, x, y);
             ScoreViewModel.SelectedPageViewModel.AddMusicItem(newMusicItemViewModel, ScoreViewModel.MusicItemsSize);
+            if (!DragAndDropContext.MusicItemViewModel.IsInToolbox) ScoreViewModel.SelectedPageViewModel.RemoveMusicItem(DragAndDropContext.MusicItemViewModel);
             DragAndDropContext.IsDragging = false;
         }
 
