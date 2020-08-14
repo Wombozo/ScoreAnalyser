@@ -17,15 +17,15 @@
     </UserControl.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         <Grid.Background>
             <ImageBrush Source="{Binding Path=BackGroundImagePath, Converter={StaticResource bitmapConverter}}" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
-        </Grid.RowDefinitions>
         <TabControl Items="{Binding Path=ScorePagesVM}" Name="TabControl" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" Grid.Row="0">
+                    VerticalAlignment="Stretch" ZIndex="0" Grid.Row="0" Grid.RowSpan="2">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=PageNumber}" />
@@ -39,7 +39,7 @@
             </TabControl.ContentTemplate>
         </TabControl>
         <Slider Orientation="Horizontal" Value="{Binding Path=MusicItemsSize}" Minimum="10" Maximum="400"
-                DockPanel.Dock="Bottom" Grid.Row="1" VerticalAlignment="Center"
-                IsVisible="{Binding Path=SizeItemsVisible}" />
+                VerticalAlignment="Center" Grid.Row="1" Margin="50, 0, 50, 0"
+                IsVisible="{Binding Path=SizeItemsVisible}" ZIndex="1"/>
     </Grid>
 </UserControl>
