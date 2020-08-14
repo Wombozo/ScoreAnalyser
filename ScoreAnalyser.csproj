@@ -8,6 +8,9 @@
     <None Include="Assets\png\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Assets\backgrounds\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Folder Include="Models\" />
     <Compile Update="**\*.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>

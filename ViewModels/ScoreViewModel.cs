@@ -19,6 +19,14 @@ namespace ScoreAnalyser.ViewModels
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
         public ScorePageViewModel SelectedPageViewModel { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
+
+        public string BackGroundImagePath
+        {
+            get => backGroundImagePath;
+            set => this.RaiseAndSetIfChanged(ref backGroundImagePath, value);
+        }
+
+        private string backGroundImagePath = Directory.GetCurrentDirectory() + "/Assets/backgrounds/score.png";
         public bool SizeItemsVisible
         {
             get => _sizeItemsVisible;
