@@ -11,7 +11,7 @@
     </Design.DataContext>
 
     <DockPanel>
-        <ItemsControl Items="{Binding Path=Miscs}" Background="LightGreen">
+        <ItemsControl Items="{Binding Path=Miscs}" Background="Plum">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel MaxWidth="200"/>

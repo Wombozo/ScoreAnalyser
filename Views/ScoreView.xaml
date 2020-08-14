@@ -25,10 +25,10 @@
             <ImageBrush Source="{Binding Path=BackGroundImagePath, Converter={StaticResource bitmapConverter}}" Stretch="UniformToFill"/>
         </Grid.Background>
         <TabControl Items="{Binding Path=ScorePagesVM}" Name="TabControl" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" ZIndex="0" Grid.Row="0" Grid.RowSpan="2">
+                    VerticalAlignment="Stretch" ZIndex="0" Grid.Row="0" Grid.RowSpan="2" >
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=PageNumber}" />
+                    <TextBlock Text="{Binding Path=PageNumber}" Foreground="White"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>

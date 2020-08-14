@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using ReactiveUI;
@@ -10,6 +11,7 @@ namespace ScoreAnalyser.ViewModels
     {
         public MainWindowViewModel()
         {
+            InfoText = new InfoText();
             DragAndDropContext = new DragAndDropContext();
             DominantToolbox = new DominantToolboxViewModel(DragAndDropContext);
             TonicToolbox = new TonicToolboxViewModel(DragAndDropContext);
@@ -17,9 +19,10 @@ namespace ScoreAnalyser.ViewModels
             MiscToolbox = new MiscToolboxViewModel(DragAndDropContext);
             KeyMajorToolbox = new KeyMajorToolboxViewModel(DragAndDropContext);
             KeyMinorToolbox = new KeyMinorToolboxViewModel(DragAndDropContext);
-            Score = new ScoreViewModel(DragAndDropContext);
+            Score = new ScoreViewModel(DragAndDropContext, InfoText);
         }
 
+        public InfoText InfoText { get; set; }
         public DominantToolboxViewModel DominantToolbox { get; }
         public TonicToolboxViewModel TonicToolbox { get; }
         public PredominantToolboxViewModel PredominantToolbox { get; }
@@ -33,6 +36,7 @@ namespace ScoreAnalyser.ViewModels
 
         public async Task OpenProject(Window parentWindow)
         {
+            InfoText.NewMessage("Opening new project");
             var openFileDialog = new OpenFileDialog
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -45,11 +49,16 @@ namespace ScoreAnalyser.ViewModels
             var filter = new FileDialogFilter {Extensions = new List<string> {"xml"}, Name = "XML files"};
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await openFileDialog.ShowAsync(parentWindow);
-            Score.ImportScore(result[0]);
+            try
+            {
+                Score.ImportScore(result[0]);
+                InfoText.Empty();
+            }
+            catch(FileNotFoundException _){}
         }
         public async Task ImportPDF(Window parentWindow)
         {
-            InfoText = "Importing PDF";
+            InfoText.NewMessage("Importing PDF");
             var openFileDialog = new OpenFileDialog
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -63,12 +72,12 @@ namespace ScoreAnalyser.ViewModels
             openFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await openFileDialog.ShowAsync(parentWindow);
             Score.SetNewScore(result[0]);
-            InfoText = "";
+            InfoText.Empty();
         }
 
         public async Task Save(Window parentWindow)
         {
-            InfoText = "Saving project";
+            InfoText.NewMessage("Saving project");
             var saveFileDialog = new SaveFileDialog()
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -81,17 +90,10 @@ namespace ScoreAnalyser.ViewModels
             saveFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await saveFileDialog.ShowAsync(parentWindow);
             Score.Serialize(result);
-            InfoText = "";
+            InfoText.Empty();
         }
 
         public void ShowSizeItems() => Score.SizeItemsVisible = !Score.SizeItemsVisible;
-        public string InfoText
-        {
-            get => _infoText;
-            set => this.RaiseAndSetIfChanged(ref _infoText, value);
-        }
-
-        private string _infoText = "Welcome to ScoreAnalyser. Import a project or start a new one !";
 
         private const float _maxToolboxWidth = 200;
         private const float _minToolboxWidth = .1f;
@@ -105,6 +107,39 @@ namespace ScoreAnalyser.ViewModels
         private float _toolBoxWidth = _maxToolboxWidth;
     }
 
+    public class InfoText : ReactiveObject
+    {
+        public string Text
+        {
+            get => _text;
+            set => this.RaiseAndSetIfChanged(ref _text, value);
+        }
+        private string _text = "Welcome to ScoreAnalyser. Import a project or start a new one !";
+
+        public string Color
+        {
+            get => _color;
+            set => this.RaiseAndSetIfChanged(ref _color, value);
+        }
+        private string _color = "Black";
+
+        public void NewMessage(string message)
+        {
+            Color = "Black";
+            Text = message;
+        }
+
+        public void NewAlertMessage(string message)
+        {
+            Color = "Red";
+            Text = message;
+        }
+        public void Empty()
+        {
+            Text = "";
+            Color = "Black";
+        }
+    }
     public class DragAndDropContext
     {
         public MusicItemViewModel MusicItemViewModel { get; set; }
