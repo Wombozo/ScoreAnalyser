@@ -50,7 +50,7 @@
                     <MenuItem Header="Show/Hide Items Size Slider" Command="{Binding Path=ShowSizeItems}" />
                 </MenuItem>
             </Menu>
-            <TextBlock Text="{Binding Path=InfoText.Text}" Foreground="{Binding Path=InfoText.Color}" TextAlignment="Center" Grid.Column="2" Grid.Row="0" />
+            <TextBlock Text="{Binding Path=InfoText.Text}" Foreground="{Binding Path=InfoText.Color}" TextAlignment="Center" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <TabControl>
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">
