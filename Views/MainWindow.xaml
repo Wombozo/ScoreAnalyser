@@ -16,9 +16,9 @@
 
     <Window.Styles>
         <Style Selector="TextBlock">
-            <Setter Property="FontFamily" Value="Courier New"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Courier New" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </Window.Styles>
 
@@ -44,13 +44,22 @@
                     <MenuItem Header="Save as" Command="{Binding Path=Save}"
                               CommandParameter="{Binding ElementName=MainWindow}" />
                 </MenuItem>
-                <MenuItem Header="Tools">
-                    <MenuItem Header="Show/Hide Items Box" Command="{Binding Path=ShowHideItems}" />
+                <MenuItem Header="View">
+                    <MenuItem Header="Items Box" Command="{Binding Path=ShowHideItems}">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Path=ShowItemsState}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <Separator />
-                    <MenuItem Header="Show/Hide Items Size Slider" Command="{Binding Path=ShowSizeItems}" />
+                    <MenuItem Header="Items Size Slider" Command="{Binding Path=ShowSizeItems}">
+                        <MenuItem.Icon>
+                            <CheckBox IsChecked="{Binding Path=ShowItemsSizeState}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
-            <TextBlock Text="{Binding Path=InfoText.Text}" Foreground="{Binding Path=InfoText.Color}" TextAlignment="Center" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
+            <TextBlock Text="{Binding Path=InfoText.Text}" Foreground="{Binding Path=InfoText.Color}"
+                       TextAlignment="Center" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" />
             <DockPanel Grid.Column="0" Grid.Row="1">
                 <TabControl>
                     <TabItem Header="Harmonies" VerticalContentAlignment="Center">
@@ -123,7 +132,7 @@
                         </Grid>
                     </TabItem>
                     <TabItem Header="Misc" VerticalContentAlignment="Center">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" >
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <views:MiscToolboxView>
                                 <views:MiscToolboxView.DataContext>
                                     <Binding Path="MiscToolbox" />

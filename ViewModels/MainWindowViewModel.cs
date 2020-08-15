@@ -93,12 +93,32 @@ namespace ScoreAnalyser.ViewModels
             InfoText.Empty();
         }
 
-        public void ShowSizeItems() => Score.SizeItemsVisible = !Score.SizeItemsVisible;
+        public void ShowSizeItems() =>ShowItemsSizeState = !ShowItemsSizeState;
+        public bool ShowItemsSizeState
+        {
+            get => _showItemsSizeState;
+            set
+            {
+                Score.SizeItemsVisible = !Score.SizeItemsVisible;
+                this.RaiseAndSetIfChanged(ref _showItemsSizeState, value);
+            }
+        }
+        private bool _showItemsSizeState;
 
         private const float _maxToolboxWidth = 200;
         private const float _minToolboxWidth = .1f;
-        public void ShowHideItems() => ToolBoxWidth = ToolBoxWidth < 1 ? _maxToolboxWidth : _minToolboxWidth;
 
+        public void ShowHideItems() => ShowItemsState = !ShowItemsState;
+        public bool ShowItemsState
+        {
+            get => _showItemsState;
+            set
+            {
+                ToolBoxWidth = ToolBoxWidth < 1 ? _maxToolboxWidth : _minToolboxWidth;
+                this.RaiseAndSetIfChanged(ref _showItemsState, value);
+            }
+        }
+        private bool _showItemsState = true;
         public float ToolBoxWidth
         {
             get => _toolBoxWidth;
