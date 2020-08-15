@@ -126,48 +126,4 @@ namespace ScoreAnalyser.ViewModels
         }
         private float _toolBoxWidth = _maxToolboxWidth;
     }
-
-    public class InfoText : ReactiveObject
-    {
-        public string Text
-        {
-            get => _text;
-            set => this.RaiseAndSetIfChanged(ref _text, value);
-        }
-        private string _text = "Welcome to ScoreAnalyser. Import a project or start a new one !";
-
-        public string Color
-        {
-            get => _color;
-            set => this.RaiseAndSetIfChanged(ref _color, value);
-        }
-        private string _color = "Black";
-
-        public void NewMessage(string message)
-        {
-            Color = "Black";
-            Text = message;
-        }
-
-        public void NewAlertMessage(string message)
-        {
-            Color = "Red";
-            Text = message;
-        }
-        public void Empty()
-        {
-            Text = "";
-            Color = "Black";
-        }
-    }
-    public class DragAndDropContext
-    {
-        public MusicItemViewModel MusicItemViewModel { get; set; }
-        public bool IsDragging = false;
-        public bool Authorized = false;
-        public event EventHandler MouseReleased;
-        public event EventHandler MousePressed;
-        public void NotifyReleased(EventArgs e) => MouseReleased?.Invoke(this, e);
-        public void NotifyPressed(EventArgs e) => MousePressed?.Invoke(this, e);
-    }
 }
