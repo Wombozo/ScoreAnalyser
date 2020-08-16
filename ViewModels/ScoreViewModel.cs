@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -132,7 +133,15 @@ namespace ScoreAnalyser.ViewModels
             var ser = new XmlSerializer(typeof(ScoreBoard));
             using var sr = new StreamReader(path);
             ScoreBoard = ser.Deserialize(sr) as ScoreBoard;
-            RestoreModel();
+            try
+            {
+                RestoreModel();
+                ProjectPath = path;
+            }
+            catch (FileNotFoundException e)
+            {
+                throw new FileNotFoundException();
+            }
         }
 
         public void Serialize(string path)

@@ -52,7 +52,8 @@ namespace ScoreAnalyser.ViewModels
             try
             {
                 Score.ImportScore(result[0]);
-                InfoText.Empty();
+                SaveEnable = true;
+                InfoText.NewMessage($"Project {result[0]} restored !");
             }
             catch(FileNotFoundException){}
         }
