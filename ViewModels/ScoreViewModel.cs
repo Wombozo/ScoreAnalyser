@@ -22,6 +22,7 @@ namespace ScoreAnalyser.ViewModels
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
         public ScorePageViewModel SelectedPageViewModel { get; set; }
         public DragAndDropContext DragAndDropContext { get; }
+        public string ProjectPath { get; set; }
 
         public string BackGroundImagePath
         {
@@ -140,7 +141,8 @@ namespace ScoreAnalyser.ViewModels
             var xsSubmit = new XmlSerializer(typeof(ScoreBoard));
             var file = File.Create(path);
             xsSubmit.Serialize(file, ScoreBoard);
-            InfoText.NewMessage("Project saved !");
+            ProjectPath = path;
+            InfoText.NewMessage($"Project saved as {path}!");
         }
     }
 }

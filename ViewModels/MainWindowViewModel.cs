@@ -75,9 +75,10 @@ namespace ScoreAnalyser.ViewModels
             InfoText.Empty();
         }
 
-        public async Task Save(Window parentWindow)
+        public void Save(Window parentWindow) => Score.Serialize(Score.ProjectPath);
+
+        public async Task SaveAs(Window parentWindow)
         {
-            InfoText.NewMessage("Saving project");
             var saveFileDialog = new SaveFileDialog()
             {
                 Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -90,9 +91,16 @@ namespace ScoreAnalyser.ViewModels
             saveFileDialog.Filters = new List<FileDialogFilter> {filter};
             var result = await saveFileDialog.ShowAsync(parentWindow);
             Score.Serialize(result);
-            InfoText.Empty();
+            SaveEnable = true;
         }
 
+        public bool SaveEnable
+        {
+            get => _saveEnable;
+            set => this.RaiseAndSetIfChanged(ref _saveEnable, value);
+        }
+
+        private bool _saveEnable;
         public void ShowSizeItems() =>ShowItemsSizeState = !ShowItemsSizeState;
         public bool ShowItemsSizeState
         {

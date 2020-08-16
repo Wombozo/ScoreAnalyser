@@ -41,7 +41,9 @@
                     <MenuItem Header="Import PDF Score" Command="{Binding Path=ImportPDF}"
                               CommandParameter="{Binding ElementName=MainWindow}" />
                     <Separator />
-                    <MenuItem Header="Save as" Command="{Binding Path=Save}"
+                    <MenuItem Header="Save" Command= "{Binding Path=Save}" IsEnabled="{Binding Path=SaveEnable}"/>
+                    <Separator />
+                    <MenuItem Header="Save as" Command="{Binding Path=SaveAs}"
                               CommandParameter="{Binding ElementName=MainWindow}" />
                 </MenuItem>
                 <MenuItem Header="View">
