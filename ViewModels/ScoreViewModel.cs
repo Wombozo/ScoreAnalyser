@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using Avalonia.Controls;
 using ReactiveUI;
 using ScoreAnalyser.Models;
 
@@ -140,7 +138,6 @@ namespace ScoreAnalyser.ViewModels
         {
             InfoText.NewMessage("Saving project to XML...");
             var xsSubmit = new XmlSerializer(typeof(ScoreBoard));
-            var sww = new StringWriter();
             var file = File.Create(path);
             xsSubmit.Serialize(file, ScoreBoard);
             InfoText.NewMessage("Project saved !");

@@ -1,7 +1,5 @@
 #nullable enable
-using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -15,38 +13,38 @@ namespace ScoreAnalyser.Views
         {
             InitializeComponent();
         }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
             WindowState = WindowState.Maximized;
             KeyDown += KeyPressedScale;
-            // Closing += WhenClosing;
+            Closing += WhenClosing;
         }
 
-        // private void WhenClosing(object? o, EventArgs _args)
-        // {
-        //     var args = (CancelEventArgs) _args;
-        //     var result = Task.Run(ValidateHandleClosing).Result;
-        //     args.Cancel = !result;
-        // }
+        private async void WhenClosing(object? o, CancelEventArgs args)
+        {
+            var vm = (MainWindowViewModel) DataContext;
+            if (vm.Score.ScorePagesVM.Count == 0) return;
+            args.Cancel = true;
+            var result =
+                await MessageBoxView.Show(this, "Closing ?", "You may have unsaved work. Do you really want to exit ?");
+            if (result != MessageBoxView.MessageBoxResult.Yes) return;
+            Closing -= WhenClosing;
+            Close();
+        }
 
-        // private async Task<bool> ValidateHandleClosing()
-        // {
-        //     var res = await MessageBoxView.Show(this, "Closing ?", "You have unsaved work. Do you really want to exit ?",MessageBoxView.MessageBoxButtons.YesNo);
-        //     return res == MessageBoxView.MessageBoxResult.Yes;
-        // }
         private void KeyPressedScale(object? sender, KeyEventArgs key)
         {
             switch (key.Key)
             {
                 case Key.Add:
-                    ((MainWindowViewModel)DataContext).IncreaseScaling();
+                    ((MainWindowViewModel) DataContext).IncreaseScaling();
                     break;
                 case Key.Subtract:
-                    ((MainWindowViewModel)DataContext).DecreaseScaling();
+                    ((MainWindowViewModel) DataContext).DecreaseScaling();
                     break;
             }
         }
     }
-
 }

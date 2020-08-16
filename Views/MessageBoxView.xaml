@@ -7,7 +7,7 @@
         Icon="/Assets/avalonia-logo.ico" WindowStartupLocation="CenterOwner">
     
     <StackPanel HorizontalAlignment="Center" >
-        <TextBlock HorizontalAlignment="Center" Name="Text" />
+        <TextBlock HorizontalAlignment="Center" Name="Text" Margin="5,5,5,5"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="Buttons">
             <StackPanel.Styles>
                 <Style Selector="Button">
