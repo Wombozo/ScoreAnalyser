@@ -35,8 +35,10 @@ namespace ScoreAnalyser.Views
         {
             if (!(args is PointerPressedContextEventArgs pointerPressedContextEventArgs) || pointerPressedContextEventArgs.IsInToolbox)
                 return;
+#pragma warning disable 0618
             switch (pointerPressedContextEventArgs.PointerPressedEventArgs.InputModifiers)
             {
+
                 case InputModifiers.LeftMouseButton:
                     DragAndDropContext.IsDragging = true;
                     var musicItem =
