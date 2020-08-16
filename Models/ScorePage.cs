@@ -10,10 +10,9 @@ namespace ScoreAnalyser.Models
         public ScorePage()
         {
         }
+        public int PageNumber { get; set; }
         public float Scaling { get; set; }
         public List<MusicItem> MusicItems { get; set; }
-        public int PageNumber { get; set; }
-
         public ScorePage(int pageNumber) : this(1, new MusicItem[0], pageNumber)
         {
         }
