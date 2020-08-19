@@ -24,6 +24,7 @@ namespace ScoreAnalyser.Views
         private void WhenDataContextChanged(object o, EventArgs args)
         {
             ScoreViewModel = (ScoreViewModel) DataContext;
+            ScoreViewModel.View = this;
             TabControl = this.FindControl<TabControl>("TabControl");
             TabControl.SelectionChanged += TabItemChanged;
             DragAndDropContext = ScoreViewModel.DragAndDropContext;

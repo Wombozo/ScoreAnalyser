@@ -95,6 +95,23 @@ namespace ScoreAnalyser.ViewModels
             SaveEnable = true;
         }
 
+        public async Task ExportPDF(Window parentWindow)
+        {
+            var saveFileDialog = new SaveFileDialog()
+            {
+                Directory = Environment.OSVersion.Platform == PlatformID.Unix ||
+                            Environment.OSVersion.Platform == PlatformID.MacOSX
+                    ? Environment.GetEnvironmentVariable("HOME")
+                    : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%"),
+                Title = "Export project as PDF ...",
+            };
+            var filter = new FileDialogFilter {Extensions = new List<string> {"pdf"}, Name = "PDF files"};
+            saveFileDialog.Filters = new List<FileDialogFilter> {filter};
+            var result = await saveFileDialog.ShowAsync(parentWindow);
+            Score.SaveAllPagesTo(result);
+            InfoText.NewMessage($"Project exported as {result}");
+        }
+
         public bool SaveEnable
         {
             get => _saveEnable;

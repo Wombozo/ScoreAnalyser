@@ -45,6 +45,9 @@
                     <Separator />
                     <MenuItem Header="Save as" Command="{Binding Path=SaveAs}"
                               CommandParameter="{Binding ElementName=MainWindow}" />
+                    <Separator />
+                    <MenuItem Header="Export as PDF" Command="{Binding Path=ExportPDF}"
+                              CommandParameter="{Binding ElementName=MainWindow}" />
                 </MenuItem>
                 <MenuItem Header="View">
                     <MenuItem Header="Items Box" Command="{Binding Path=ShowHideItems}">

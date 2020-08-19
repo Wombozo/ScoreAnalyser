@@ -4,8 +4,13 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.VisualTree;
+using AvaloniaPrintToPdf;
 using ReactiveUI;
 using ScoreAnalyser.Models;
+using ScoreAnalyser.Views;
 
 namespace ScoreAnalyser.ViewModels
 {
@@ -18,6 +23,7 @@ namespace ScoreAnalyser.ViewModels
             InfoText = infoText;
         }
 
+        public IVisual View { get; set; }
         public ScoreBoard ScoreBoard { get; set; }
         public InfoText InfoText { get; set; }
         public ObservableCollection<ScorePageViewModel> ScorePagesVM { get; set; }
@@ -152,6 +158,15 @@ namespace ScoreAnalyser.ViewModels
             xsSubmit.Serialize(file, ScoreBoard);
             ProjectPath = path;
             InfoText.NewMessage($"Project saved as {path}!");
+        }
+
+        private readonly Size maximumPageSize = new Size(2000, 2000);
+        public void SaveAllPagesTo(string filename)
+        {
+            var scorePageViewModels = from tabItem in View.FindAllVisuals<TabItem>()
+                select tabItem.Content as ScorePageViewModel;
+            var allPages = scorePageViewModels.Select(scorePagesViewModel => new ScorePageView(scorePagesViewModel));
+            Print.ToFile(filename, allPages.Layout(maximumPageSize));
         }
     }
 }

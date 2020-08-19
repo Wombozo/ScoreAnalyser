@@ -9,6 +9,12 @@ namespace ScoreAnalyser.Views
     {
         public ScorePageView() => InitializeComponent();
 
+        public ScorePageView(ScorePageViewModel scorePageViewModel)
+        {
+            DataContext = scorePageViewModel;
+            InitializeComponent();
+        }
+
         private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 
         private void OnChangeDataContext(object e, EventArgs args)
