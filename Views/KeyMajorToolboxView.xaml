@@ -10,7 +10,7 @@
     </Design.DataContext>
 
     <DockPanel>
-        <ItemsControl Items="{Binding Path=Keys}" Background="LightCoral" Width="250">
+        <ItemsControl Items="{Binding Path=Keys}" Background="Khaki" Width="250">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel MaxWidth="200"/>
